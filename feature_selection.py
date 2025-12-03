@@ -37,7 +37,9 @@ def evaluate_single_sfts_lobo(
     X_fband: Dict[int, np.ndarray],
     channel_groups: List[ChannelGroup],
     time_windows: List[TimeWindow],
+    use_gpu: bool = False,
 ) -> float:
+
     """
     Evaluates a single SFTS using LOBO CV.
     """
@@ -70,8 +72,18 @@ def evaluate_single_sfts_lobo(
             continue
 
         # Fit CSP on training data
-        divcsp = DivCSP()
+        # Fit CSP on training data
+        # Fit CSP on training data
+        # Use DivCSPTorch if GPU enabled
+        if use_gpu:
+            from divcsp_torch import DivCSPTorch
+            divcsp = DivCSPTorch(device="cuda")
+        else:
+            divcsp = DivCSP()
+
+            
         divcsp.fit(X_sfts_all[trial_train], y[trial_train])
+
         
         # Transform
         f_train = divcsp.transform(X_sfts_all[trial_train])
@@ -103,7 +115,9 @@ def rank_all_sfts(
     Uses parallel processing.
     """
     print(f"Precomputing frequency bands...")
-    X_fband = precompute_freq_bands(dataset, freq_bands)
+    use_gpu = getattr(cfg.train_cfg, 'use_gpu', False)
+    X_fband = precompute_freq_bands(dataset, freq_bands, use_gpu=use_gpu)
+
     
     print(f"Evaluating {len(sfts_specs)} SFTS candidates...")
     
@@ -112,9 +126,10 @@ def rank_all_sfts(
     
     results = Parallel(n_jobs=n_jobs)(
         delayed(evaluate_single_sfts_lobo)(
-            dataset, spec, X_fband, channel_groups, time_windows
+            dataset, spec, X_fband, channel_groups, time_windows, use_gpu
         ) for spec in tqdm(sfts_specs, desc="Ranking SFTS")
     )
+
     
     scores = [SFTSScore(sfts_id=spec.id, acc=acc) for spec, acc in zip(sfts_specs, results)]
     
@@ -129,7 +144,9 @@ def _precalc_single_sfts(
     channel_groups: List[ChannelGroup],
     time_windows: List[TimeWindow],
     dataset: Dataset,
+    use_gpu: bool = False,
 ) -> Tuple[int, Dict[str, DivCSPParams], Dict[str, np.ndarray]]:
+
     """
     Helper for parallel pre-calculation of CSP features.
     Returns:
@@ -146,8 +163,17 @@ def _precalc_single_sfts(
     feats_map = {}
     
     # 1. Fit on ALL data (for final model)
-    divcsp_all = DivCSP()
+    # 1. Fit on ALL data (for final model)
+    # 1. Fit on ALL data (for final model)
+    if use_gpu:
+        from divcsp_torch import DivCSPTorch
+        divcsp_all = DivCSPTorch(device="cuda")
+    else:
+        divcsp_all = DivCSP()
+
+        
     divcsp_all.fit(X_sfts, y)
+
     csp_params_map['all'] = divcsp_all.get_params()
     feats_map['all'] = divcsp_all.transform(X_sfts)
     
@@ -159,8 +185,16 @@ def _precalc_single_sfts(
         if np.sum(mask_train) == 0:
             continue
             
-        divcsp_fold = DivCSP()
+        if np.sum(mask_train) == 0:
+            continue
+            
+        if use_gpu:
+            divcsp_fold = DivCSPTorch(device="cuda")
+        else:
+            divcsp_fold = DivCSP()
+            
         divcsp_fold.fit(X_sfts[mask_train], y[mask_train])
+
         
         # Transform ALL data using this fold's CSP
         # We will slice it later in evaluation
@@ -250,8 +284,12 @@ def build_ensemble(
     Builds the ensemble by iteratively adding SFTS (Algorithm 2).
     Optimized with parallel pre-calculation and parallel search.
     """
-    X_fband = precompute_freq_bands(dataset, freq_bands)
+
+    use_gpu = getattr(cfg.train_cfg, 'use_gpu', False)
+    X_fband = precompute_freq_bands(dataset, freq_bands, use_gpu=use_gpu)
     blocks = lobo_blocks(dataset)
+
+
     y = dataset.y
 
     D = cfg.fs_cfg.D
@@ -268,9 +306,10 @@ def build_ensemble(
     # 1. Parallel Pre-calculation
     precalc_results = Parallel(n_jobs=n_jobs)(
         delayed(_precalc_single_sfts)(
-            sid, sfts_specs, X_fband, channel_groups, time_windows, dataset
+            sid, sfts_specs, X_fband, channel_groups, time_windows, dataset, use_gpu
         ) for sid in tqdm(all_sfts_ids, desc="Pre-calc Features")
     )
+
     
     # Store in dictionaries
     csp_params_map_all: Dict[int, Dict] = {}

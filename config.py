@@ -31,11 +31,19 @@ class TrainingConfig:
     random_state: int = 42
     n_jobs: int = -1          # -1 = use all cores
     verbose: int = 1
+    use_gpu: bool = False     # Enable GPU acceleration
 
 @dataclass
 class SVMConfig:
     max_iter: int = 100000
     dual: str = "auto"
+
+@dataclass
+class ExperimentConfig:
+    mode: str = "within-subject"
+    use_E_as_test: bool = True # If True, use T file for train, E file for test
+    test_ratio: float = 0.2    # Used if use_E_as_test is False
+    random_state: int = 42
 
 @dataclass
 class GlobalConfig:
@@ -54,6 +62,7 @@ class GlobalConfig:
     fs_cfg: FeatureSelectionConfig = None
     train_cfg: TrainingConfig = None
     svm_cfg: SVMConfig = None
+    exp_cfg: ExperimentConfig = None
 
     def __post_init__(self):
         if self.selected_labels is None:
@@ -79,6 +88,9 @@ class GlobalConfig:
             self.train_cfg = TrainingConfig()
         if self.svm_cfg is None:
             self.svm_cfg = SVMConfig()
+        if self.exp_cfg is None:
+            self.exp_cfg = ExperimentConfig()
 
 # Global configuration instance
 cfg = GlobalConfig()
+

@@ -1,0 +1,230 @@
+2025-12-03 11:24:07,585 - INFO - Logging started. Saving to logs\train_20251203_112407.log
+2025-12-03 11:24:07,586 - INFO - Execution started at: 2025-12-03 11:24:07.586331
+2025-12-03 11:24:07,586 - INFO - Training ALL subjects (1-9)...
+2025-12-03 11:24:07,586 - INFO - ==========================================
+2025-12-03 11:24:07,586 - INFO - Starting training for Subject 1
+2025-12-03 11:24:07,587 - INFO - ==========================================
+2025-12-03 11:24:07,587 - INFO - Loading data for Subject 1...
+2025-12-03 11:24:07,975 - INFO - Mode: Train on T file, Test on E file.
+2025-12-03 11:24:08,360 - INFO - Train Data: X=(288, 22, 1000), y=(288,)
+2025-12-03 11:24:08,360 - INFO - Test Data: X=(0,), y=(0,)
+2025-12-03 11:24:08,360 - INFO - Initializing model...
+2025-12-03 11:24:08,361 - INFO - Fitting model (this may take a while)...
+2025-12-03 11:24:08,361 - INFO - GPU Acceleration Enabled.
+2025-12-03 11:24:08,738 - ERROR - Failed to train subject 1: view size is not compatible with input tensor's size and stride (at least one dimension spans across two contiguous subspaces). Use .reshape(...) instead.
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_train.py", line 145, in main
+    run_experiment_for_subject(sub, args.output_dir)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_train.py", line 89, in run_experiment_for_subject
+    model.fit(ds_train)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\model.py", line 64, in fit
+    scores_sorted = rank_all_sfts(
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\feature_selection.py", line 116, in rank_all_sfts
+    X_fband = precompute_freq_bands(dataset, freq_bands, use_gpu=use_gpu)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\features.py", line 73, in precompute_freq_bands
+    X_fband[fb.id] = bandpass_filter_torch(X, fs, fb.f_low, fb.f_high, device=device)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\features.py", line 39, in bandpass_filter_torch
+    X_reshaped = X_tensor.view(T * C, 1, N)
+RuntimeError: view size is not compatible with input tensor's size and stride (at least one dimension spans across two contiguous subspaces). Use .reshape(...) instead.
+2025-12-03 11:24:08,745 - INFO - ==========================================
+2025-12-03 11:24:08,745 - INFO - Starting training for Subject 2
+2025-12-03 11:24:08,745 - INFO - ==========================================
+2025-12-03 11:24:08,746 - INFO - Loading data for Subject 2...
+2025-12-03 11:24:09,141 - INFO - Mode: Train on T file, Test on E file.
+2025-12-03 11:24:09,524 - INFO - Train Data: X=(288, 22, 1000), y=(288,)
+2025-12-03 11:24:09,524 - INFO - Test Data: X=(0,), y=(0,)
+2025-12-03 11:24:09,524 - INFO - Initializing model...
+2025-12-03 11:24:09,524 - INFO - Fitting model (this may take a while)...
+2025-12-03 11:24:09,525 - INFO - GPU Acceleration Enabled.
+2025-12-03 11:24:09,694 - ERROR - Failed to train subject 2: view size is not compatible with input tensor's size and stride (at least one dimension spans across two contiguous subspaces). Use .reshape(...) instead.
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_train.py", line 145, in main
+    run_experiment_for_subject(sub, args.output_dir)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_train.py", line 89, in run_experiment_for_subject
+    model.fit(ds_train)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\model.py", line 64, in fit
+    scores_sorted = rank_all_sfts(
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\feature_selection.py", line 116, in rank_all_sfts
+    X_fband = precompute_freq_bands(dataset, freq_bands, use_gpu=use_gpu)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\features.py", line 73, in precompute_freq_bands
+    X_fband[fb.id] = bandpass_filter_torch(X, fs, fb.f_low, fb.f_high, device=device)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\features.py", line 39, in bandpass_filter_torch
+    X_reshaped = X_tensor.view(T * C, 1, N)
+RuntimeError: view size is not compatible with input tensor's size and stride (at least one dimension spans across two contiguous subspaces). Use .reshape(...) instead.
+2025-12-03 11:24:09,701 - INFO - ==========================================
+2025-12-03 11:24:09,701 - INFO - Starting training for Subject 3
+2025-12-03 11:24:09,701 - INFO - ==========================================
+2025-12-03 11:24:09,701 - INFO - Loading data for Subject 3...
+2025-12-03 11:24:10,082 - INFO - Mode: Train on T file, Test on E file.
+2025-12-03 11:24:10,438 - INFO - Train Data: X=(288, 22, 1000), y=(288,)
+2025-12-03 11:24:10,439 - INFO - Test Data: X=(0,), y=(0,)
+2025-12-03 11:24:10,439 - INFO - Initializing model...
+2025-12-03 11:24:10,439 - INFO - Fitting model (this may take a while)...
+2025-12-03 11:24:10,439 - INFO - GPU Acceleration Enabled.
+2025-12-03 11:24:10,600 - ERROR - Failed to train subject 3: view size is not compatible with input tensor's size and stride (at least one dimension spans across two contiguous subspaces). Use .reshape(...) instead.
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_train.py", line 145, in main
+    run_experiment_for_subject(sub, args.output_dir)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_train.py", line 89, in run_experiment_for_subject
+    model.fit(ds_train)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\model.py", line 64, in fit
+    scores_sorted = rank_all_sfts(
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\feature_selection.py", line 116, in rank_all_sfts
+    X_fband = precompute_freq_bands(dataset, freq_bands, use_gpu=use_gpu)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\features.py", line 73, in precompute_freq_bands
+    X_fband[fb.id] = bandpass_filter_torch(X, fs, fb.f_low, fb.f_high, device=device)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\features.py", line 39, in bandpass_filter_torch
+    X_reshaped = X_tensor.view(T * C, 1, N)
+RuntimeError: view size is not compatible with input tensor's size and stride (at least one dimension spans across two contiguous subspaces). Use .reshape(...) instead.
+2025-12-03 11:24:10,607 - INFO - ==========================================
+2025-12-03 11:24:10,608 - INFO - Starting training for Subject 4
+2025-12-03 11:24:10,608 - INFO - ==========================================
+2025-12-03 11:24:10,608 - INFO - Loading data for Subject 4...
+2025-12-03 11:24:10,953 - INFO - Mode: Train on T file, Test on E file.
+2025-12-03 11:24:11,325 - INFO - Train Data: X=(288, 22, 1000), y=(288,)
+2025-12-03 11:24:11,325 - INFO - Test Data: X=(0,), y=(0,)
+2025-12-03 11:24:11,325 - INFO - Initializing model...
+2025-12-03 11:24:11,325 - INFO - Fitting model (this may take a while)...
+2025-12-03 11:24:11,325 - INFO - GPU Acceleration Enabled.
+2025-12-03 11:24:11,483 - ERROR - Failed to train subject 4: view size is not compatible with input tensor's size and stride (at least one dimension spans across two contiguous subspaces). Use .reshape(...) instead.
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_train.py", line 145, in main
+    run_experiment_for_subject(sub, args.output_dir)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_train.py", line 89, in run_experiment_for_subject
+    model.fit(ds_train)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\model.py", line 64, in fit
+    scores_sorted = rank_all_sfts(
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\feature_selection.py", line 116, in rank_all_sfts
+    X_fband = precompute_freq_bands(dataset, freq_bands, use_gpu=use_gpu)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\features.py", line 73, in precompute_freq_bands
+    X_fband[fb.id] = bandpass_filter_torch(X, fs, fb.f_low, fb.f_high, device=device)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\features.py", line 39, in bandpass_filter_torch
+    X_reshaped = X_tensor.view(T * C, 1, N)
+RuntimeError: view size is not compatible with input tensor's size and stride (at least one dimension spans across two contiguous subspaces). Use .reshape(...) instead.
+2025-12-03 11:24:11,491 - INFO - ==========================================
+2025-12-03 11:24:11,491 - INFO - Starting training for Subject 5
+2025-12-03 11:24:11,491 - INFO - ==========================================
+2025-12-03 11:24:11,492 - INFO - Loading data for Subject 5...
+2025-12-03 11:24:11,886 - INFO - Mode: Train on T file, Test on E file.
+2025-12-03 11:24:12,255 - INFO - Train Data: X=(288, 22, 1000), y=(288,)
+2025-12-03 11:24:12,255 - INFO - Test Data: X=(0,), y=(0,)
+2025-12-03 11:24:12,256 - INFO - Initializing model...
+2025-12-03 11:24:12,256 - INFO - Fitting model (this may take a while)...
+2025-12-03 11:24:12,256 - INFO - GPU Acceleration Enabled.
+2025-12-03 11:24:12,417 - ERROR - Failed to train subject 5: view size is not compatible with input tensor's size and stride (at least one dimension spans across two contiguous subspaces). Use .reshape(...) instead.
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_train.py", line 145, in main
+    run_experiment_for_subject(sub, args.output_dir)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_train.py", line 89, in run_experiment_for_subject
+    model.fit(ds_train)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\model.py", line 64, in fit
+    scores_sorted = rank_all_sfts(
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\feature_selection.py", line 116, in rank_all_sfts
+    X_fband = precompute_freq_bands(dataset, freq_bands, use_gpu=use_gpu)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\features.py", line 73, in precompute_freq_bands
+    X_fband[fb.id] = bandpass_filter_torch(X, fs, fb.f_low, fb.f_high, device=device)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\features.py", line 39, in bandpass_filter_torch
+    X_reshaped = X_tensor.view(T * C, 1, N)
+RuntimeError: view size is not compatible with input tensor's size and stride (at least one dimension spans across two contiguous subspaces). Use .reshape(...) instead.
+2025-12-03 11:24:12,423 - INFO - ==========================================
+2025-12-03 11:24:12,424 - INFO - Starting training for Subject 6
+2025-12-03 11:24:12,424 - INFO - ==========================================
+2025-12-03 11:24:12,424 - INFO - Loading data for Subject 6...
+2025-12-03 11:24:12,820 - INFO - Mode: Train on T file, Test on E file.
+2025-12-03 11:24:13,192 - INFO - Train Data: X=(288, 22, 1000), y=(288,)
+2025-12-03 11:24:13,192 - INFO - Test Data: X=(0,), y=(0,)
+2025-12-03 11:24:13,193 - INFO - Initializing model...
+2025-12-03 11:24:13,193 - INFO - Fitting model (this may take a while)...
+2025-12-03 11:24:13,193 - INFO - GPU Acceleration Enabled.
+2025-12-03 11:24:13,355 - ERROR - Failed to train subject 6: view size is not compatible with input tensor's size and stride (at least one dimension spans across two contiguous subspaces). Use .reshape(...) instead.
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_train.py", line 145, in main
+    run_experiment_for_subject(sub, args.output_dir)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_train.py", line 89, in run_experiment_for_subject
+    model.fit(ds_train)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\model.py", line 64, in fit
+    scores_sorted = rank_all_sfts(
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\feature_selection.py", line 116, in rank_all_sfts
+    X_fband = precompute_freq_bands(dataset, freq_bands, use_gpu=use_gpu)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\features.py", line 73, in precompute_freq_bands
+    X_fband[fb.id] = bandpass_filter_torch(X, fs, fb.f_low, fb.f_high, device=device)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\features.py", line 39, in bandpass_filter_torch
+    X_reshaped = X_tensor.view(T * C, 1, N)
+RuntimeError: view size is not compatible with input tensor's size and stride (at least one dimension spans across two contiguous subspaces). Use .reshape(...) instead.
+2025-12-03 11:24:13,362 - INFO - ==========================================
+2025-12-03 11:24:13,362 - INFO - Starting training for Subject 7
+2025-12-03 11:24:13,362 - INFO - ==========================================
+2025-12-03 11:24:13,362 - INFO - Loading data for Subject 7...
+2025-12-03 11:24:13,761 - INFO - Mode: Train on T file, Test on E file.
+2025-12-03 11:24:14,135 - INFO - Train Data: X=(288, 22, 1000), y=(288,)
+2025-12-03 11:24:14,135 - INFO - Test Data: X=(0,), y=(0,)
+2025-12-03 11:24:14,135 - INFO - Initializing model...
+2025-12-03 11:24:14,136 - INFO - Fitting model (this may take a while)...
+2025-12-03 11:24:14,136 - INFO - GPU Acceleration Enabled.
+2025-12-03 11:24:14,299 - ERROR - Failed to train subject 7: view size is not compatible with input tensor's size and stride (at least one dimension spans across two contiguous subspaces). Use .reshape(...) instead.
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_train.py", line 145, in main
+    run_experiment_for_subject(sub, args.output_dir)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_train.py", line 89, in run_experiment_for_subject
+    model.fit(ds_train)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\model.py", line 64, in fit
+    scores_sorted = rank_all_sfts(
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\feature_selection.py", line 116, in rank_all_sfts
+    X_fband = precompute_freq_bands(dataset, freq_bands, use_gpu=use_gpu)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\features.py", line 73, in precompute_freq_bands
+    X_fband[fb.id] = bandpass_filter_torch(X, fs, fb.f_low, fb.f_high, device=device)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\features.py", line 39, in bandpass_filter_torch
+    X_reshaped = X_tensor.view(T * C, 1, N)
+RuntimeError: view size is not compatible with input tensor's size and stride (at least one dimension spans across two contiguous subspaces). Use .reshape(...) instead.
+2025-12-03 11:24:14,305 - INFO - ==========================================
+2025-12-03 11:24:14,306 - INFO - Starting training for Subject 8
+2025-12-03 11:24:14,306 - INFO - ==========================================
+2025-12-03 11:24:14,306 - INFO - Loading data for Subject 8...
+2025-12-03 11:24:14,700 - INFO - Mode: Train on T file, Test on E file.
+2025-12-03 11:24:15,082 - INFO - Train Data: X=(288, 22, 1000), y=(288,)
+2025-12-03 11:24:15,082 - INFO - Test Data: X=(0,), y=(0,)
+2025-12-03 11:24:15,083 - INFO - Initializing model...
+2025-12-03 11:24:15,083 - INFO - Fitting model (this may take a while)...
+2025-12-03 11:24:15,083 - INFO - GPU Acceleration Enabled.
+2025-12-03 11:24:15,317 - ERROR - Failed to train subject 8: view size is not compatible with input tensor's size and stride (at least one dimension spans across two contiguous subspaces). Use .reshape(...) instead.
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_train.py", line 145, in main
+    run_experiment_for_subject(sub, args.output_dir)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_train.py", line 89, in run_experiment_for_subject
+    model.fit(ds_train)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\model.py", line 64, in fit
+    scores_sorted = rank_all_sfts(
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\feature_selection.py", line 116, in rank_all_sfts
+    X_fband = precompute_freq_bands(dataset, freq_bands, use_gpu=use_gpu)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\features.py", line 73, in precompute_freq_bands
+    X_fband[fb.id] = bandpass_filter_torch(X, fs, fb.f_low, fb.f_high, device=device)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\features.py", line 39, in bandpass_filter_torch
+    X_reshaped = X_tensor.view(T * C, 1, N)
+RuntimeError: view size is not compatible with input tensor's size and stride (at least one dimension spans across two contiguous subspaces). Use .reshape(...) instead.
+2025-12-03 11:24:15,324 - INFO - ==========================================
+2025-12-03 11:24:15,325 - INFO - Starting training for Subject 9
+2025-12-03 11:24:15,326 - INFO - ==========================================
+2025-12-03 11:24:15,326 - INFO - Loading data for Subject 9...
+2025-12-03 11:24:15,722 - INFO - Mode: Train on T file, Test on E file.
+2025-12-03 11:24:16,099 - INFO - Train Data: X=(288, 22, 1000), y=(288,)
+2025-12-03 11:24:16,100 - INFO - Test Data: X=(0,), y=(0,)
+2025-12-03 11:24:16,100 - INFO - Initializing model...
+2025-12-03 11:24:16,100 - INFO - Fitting model (this may take a while)...
+2025-12-03 11:24:16,100 - INFO - GPU Acceleration Enabled.
+2025-12-03 11:24:16,269 - ERROR - Failed to train subject 9: view size is not compatible with input tensor's size and stride (at least one dimension spans across two contiguous subspaces). Use .reshape(...) instead.
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_train.py", line 145, in main
+    run_experiment_for_subject(sub, args.output_dir)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_train.py", line 89, in run_experiment_for_subject
+    model.fit(ds_train)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\model.py", line 64, in fit
+    scores_sorted = rank_all_sfts(
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\feature_selection.py", line 116, in rank_all_sfts
+    X_fband = precompute_freq_bands(dataset, freq_bands, use_gpu=use_gpu)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\features.py", line 73, in precompute_freq_bands
+    X_fband[fb.id] = bandpass_filter_torch(X, fs, fb.f_low, fb.f_high, device=device)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\features.py", line 39, in bandpass_filter_torch
+    X_reshaped = X_tensor.view(T * C, 1, N)
+RuntimeError: view size is not compatible with input tensor's size and stride (at least one dimension spans across two contiguous subspaces). Use .reshape(...) instead.
+2025-12-03 11:24:16,275 - INFO - Execution finished at: 2025-12-03 11:24:16.275179
+2025-12-03 11:24:16,276 - INFO - Total execution time: 0:00:08.688848

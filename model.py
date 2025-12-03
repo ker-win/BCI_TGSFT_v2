@@ -15,10 +15,12 @@ from segmentation import (
     generate_sfts_specs,
     SFTSSpec, ChannelGroup, TimeWindow, FreqBand,
 )
-from preprocessing import preprocess_pipeline
+from preprocessing import Preprocessor
 from feature_selection import rank_all_sfts, build_ensemble, EnsembleMember
 from features import precompute_freq_bands, get_sfts_data
 from divcsp import DivCSP
+from divcsp_torch import DivCSPTorch
+
 
 @dataclass
 class FGSFTMIModelState:
@@ -27,6 +29,8 @@ class FGSFTMIModelState:
     time_windows: List[TimeWindow]
     sfts_specs: List[SFTSSpec]
     ensemble: List[EnsembleMember]
+    preprocessor: Preprocessor # Save preprocessor state
+
 
 class FGSFTMIModel:
     def __init__(self):
@@ -40,7 +44,11 @@ class FGSFTMIModel:
         
         # 1. Preprocess
         print("Preprocessing data...")
-        ds_proc = preprocess_pipeline(dataset)
+        # ds_proc = preprocess_pipeline(dataset)
+        self.preprocessor = Preprocessor(fs_target=cfg.fs)
+        self.preprocessor.fit(dataset.X, dataset.fs)
+        ds_proc = self.preprocessor.transform(dataset)
+
         
         # 2. Generate Segments
         print("Generating segments...")
@@ -69,7 +77,10 @@ class FGSFTMIModel:
             time_windows=time_windows,
             sfts_specs=sfts_specs,
             ensemble=top_members,
+            preprocessor=self.preprocessor,
+
         )
+
         print("Training complete.")
         return self
 
@@ -82,10 +93,13 @@ class FGSFTMIModel:
             raise RuntimeError("Model not fitted.")
             
         # Preprocess
-        ds_proc = preprocess_pipeline(dataset)
+        # ds_proc = preprocess_pipeline(dataset)
+        ds_proc = self.state.preprocessor.transform(dataset)
         
         # Precompute freq bands
-        X_fband = precompute_freq_bands(ds_proc, self.state.freq_bands)
+        use_gpu = getattr(cfg.train_cfg, 'use_gpu', False)
+        X_fband = precompute_freq_bands(ds_proc, self.state.freq_bands, use_gpu=use_gpu)
+
         
         n_trials = ds_proc.X.shape[0]
         n_classes = 2 # Binary
@@ -106,9 +120,18 @@ class FGSFTMIModel:
                 )
                 
                 # Transform using stored CSP params
-                divcsp = DivCSP()
+                # Transform using stored CSP params
+                # Check if we should use GPU for transform
+                use_gpu = getattr(cfg.train_cfg, 'use_gpu', False)
+                
+                if use_gpu:
+                     divcsp = DivCSPTorch(device="cuda")
+                else:
+                     divcsp = DivCSP()
+                     
                 divcsp.set_params(member.csp_params[s_id])
                 f = divcsp.transform(X_sfts)
+
                 feats_list.append(f)
             
             F_concat = np.concatenate(feats_list, axis=1)

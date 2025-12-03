@@ -116,3 +116,64 @@ def preprocess_pipeline(dataset: Dataset) -> Dataset:
     ds = crop_trials(ds, t_start=t_start, t_end=t_end)
     
     return ds
+
+class Preprocessor:
+    def __init__(self, fs_target: float = 250.0, do_scaling: bool = True):
+        self.fs_target = fs_target
+        self.do_scaling = do_scaling
+        self.scaler = None
+
+    def fit(self, X_train: np.ndarray, fs: float):
+        """
+        Fits the scaler on the training data.
+        Args:
+            X_train: (n_trials, n_channels, n_samples)
+            fs: Sampling frequency of X_train
+        """
+        # 1. Resample if needed (conceptually, we assume X_train is already consistent or we handle it)
+        # For scaling, we need to flatten
+        if self.do_scaling:
+            N, C, T = X_train.shape
+            # Flatten to (N*T, C) or (N, C*T)? 
+            # Standard scaling usually per channel or per feature. 
+            # If we want to normalize amplitude across all time points per channel:
+            # We can reshape to (N*T, C) -> fit scaler -> (mean/std per channel)
+            # Or (N, C*T) -> fit scaler -> (mean/std per timepoint per channel)
+            # EEG usually does per-channel scaling (0 mean, 1 std over time).
+            # But here we are fitting on the whole training set.
+            # Let's assume we want to standardize each channel's distribution across the dataset.
+            # Reshape to (N * T, C) to compute stats per channel.
+            X_2d = np.transpose(X_train, (0, 2, 1)).reshape(-1, C)
+            
+            from sklearn.preprocessing import StandardScaler
+            self.scaler = StandardScaler()
+            self.scaler.fit(X_2d)
+
+    def transform(self, dataset: Dataset) -> Dataset:
+        """
+        Applies resampling and scaling to the dataset.
+        """
+        # 1. Resample
+        ds_resampled = resample_to_fs(dataset, self.fs_target)
+        
+        # 2. Crop (Optional, if we want to enforce it here, but maybe better separate)
+        # For now, let's stick to what the user asked: Resample + Scaling
+        
+        X_out = ds_resampled.X
+        
+        if self.do_scaling and self.scaler is not None:
+            N, C, T = X_out.shape
+            # Reshape to (N*T, C)
+            X_2d = np.transpose(X_out, (0, 2, 1)).reshape(-1, C)
+            X_scaled = self.scaler.transform(X_2d)
+            # Reshape back to (N, T, C) then transpose to (N, C, T)
+            X_out = X_scaled.reshape(N, T, C).transpose(0, 2, 1)
+            
+        return Dataset(
+            X=X_out.astype(np.float32),
+            y=ds_resampled.y,
+            blocks=ds_resampled.blocks,
+            ch_names=ds_resampled.ch_names,
+            fs=self.fs_target
+        )
+

@@ -1,0 +1,493 @@
+2025-12-03 11:26:23,396 - INFO - Logging started. Saving to logs\train_20251203_112623.log
+2025-12-03 11:26:23,396 - INFO - Execution started at: 2025-12-03 11:26:23.396840
+2025-12-03 11:26:23,397 - INFO - Training ALL subjects (1-9)...
+2025-12-03 11:26:23,397 - INFO - ==========================================
+2025-12-03 11:26:23,397 - INFO - Starting training for Subject 1
+2025-12-03 11:26:23,398 - INFO - ==========================================
+2025-12-03 11:26:23,398 - INFO - Loading data for Subject 1...
+2025-12-03 11:26:23,770 - INFO - Mode: Train on T file, Test on E file.
+2025-12-03 11:26:24,139 - WARNING - E file for subject 1 is empty (no known labels). Falling back to splitting T file.
+2025-12-03 11:26:24,139 - INFO - Mode: Within-subject split on T file (Test Ratio: 0.2)
+2025-12-03 11:26:24,140 - INFO - Split sizes: Train=231, Test=57
+2025-12-03 11:26:24,155 - INFO - Train Data: X=(231, 22, 1000), y=(231,)
+2025-12-03 11:26:24,155 - INFO - Test Data: X=(57, 22, 1000), y=(57,)
+2025-12-03 11:26:24,155 - INFO - Initializing model...
+2025-12-03 11:26:24,155 - INFO - Fitting model (this may take a while)...
+2025-12-03 11:26:24,156 - INFO - GPU Acceleration Enabled.
+2025-12-03 11:26:30,987 - ERROR - Failed to train subject 1: DivCSP currently supports binary classification only.
+joblib.externals.loky.process_executor._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\externals\loky\process_executor.py", line 490, in _process_worker
+    r = call_item()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\externals\loky\process_executor.py", line 291, in __call__
+    return self.fn(*self.args, **self.kwargs)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 607, in __call__
+    return [func(*args, **kwargs) for func, args, kwargs in self.items]
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 607, in <listcomp>
+    return [func(*args, **kwargs) for func, args, kwargs in self.items]
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\feature_selection.py", line 82, in evaluate_single_sfts_lobo
+    divcsp.fit(X_sfts_all[trial_train], y[trial_train])
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\divcsp.py", line 65, in fit
+    raise ValueError("DivCSP currently supports binary classification only.")
+ValueError: DivCSP currently supports binary classification only.
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_train.py", line 150, in main
+    run_experiment_for_subject(sub, args.output_dir)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_train.py", line 94, in run_experiment_for_subject
+    model.fit(ds_train)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\model.py", line 64, in fit
+    scores_sorted = rank_all_sfts(
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\feature_selection.py", line 124, in rank_all_sfts
+    results = Parallel(n_jobs=n_jobs)(
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 2072, in __call__
+    return output if self.return_generator else list(output)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 1682, in _get_outputs
+    yield from self._retrieve()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 1784, in _retrieve
+    self._raise_error_fast()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 1859, in _raise_error_fast
+    error_job.get_result(self.timeout)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 758, in get_result
+    return self._return_or_raise()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 773, in _return_or_raise
+    raise self._result
+ValueError: DivCSP currently supports binary classification only.
+2025-12-03 11:26:30,998 - INFO - ==========================================
+2025-12-03 11:26:30,998 - INFO - Starting training for Subject 2
+2025-12-03 11:26:30,998 - INFO - ==========================================
+2025-12-03 11:26:30,998 - INFO - Loading data for Subject 2...
+2025-12-03 11:26:31,378 - INFO - Mode: Within-subject split on T file (Test Ratio: 0.2)
+2025-12-03 11:26:31,378 - INFO - Split sizes: Train=231, Test=57
+2025-12-03 11:26:31,392 - INFO - Train Data: X=(231, 22, 1000), y=(231,)
+2025-12-03 11:26:31,392 - INFO - Test Data: X=(57, 22, 1000), y=(57,)
+2025-12-03 11:26:31,392 - INFO - Initializing model...
+2025-12-03 11:26:31,392 - INFO - Fitting model (this may take a while)...
+2025-12-03 11:26:31,392 - INFO - GPU Acceleration Enabled.
+2025-12-03 11:26:37,552 - ERROR - Failed to train subject 2: DivCSP currently supports binary classification only.
+joblib.externals.loky.process_executor._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\externals\loky\process_executor.py", line 490, in _process_worker
+    r = call_item()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\externals\loky\process_executor.py", line 291, in __call__
+    return self.fn(*self.args, **self.kwargs)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 607, in __call__
+    return [func(*args, **kwargs) for func, args, kwargs in self.items]
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 607, in <listcomp>
+    return [func(*args, **kwargs) for func, args, kwargs in self.items]
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\feature_selection.py", line 82, in evaluate_single_sfts_lobo
+    divcsp.fit(X_sfts_all[trial_train], y[trial_train])
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\divcsp.py", line 65, in fit
+    raise ValueError("DivCSP currently supports binary classification only.")
+ValueError: DivCSP currently supports binary classification only.
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_train.py", line 150, in main
+    run_experiment_for_subject(sub, args.output_dir)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_train.py", line 94, in run_experiment_for_subject
+    model.fit(ds_train)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\model.py", line 64, in fit
+    scores_sorted = rank_all_sfts(
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\feature_selection.py", line 124, in rank_all_sfts
+    results = Parallel(n_jobs=n_jobs)(
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 2072, in __call__
+    return output if self.return_generator else list(output)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 1682, in _get_outputs
+    yield from self._retrieve()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 1784, in _retrieve
+    self._raise_error_fast()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 1859, in _raise_error_fast
+    error_job.get_result(self.timeout)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 758, in get_result
+    return self._return_or_raise()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 773, in _return_or_raise
+    raise self._result
+ValueError: DivCSP currently supports binary classification only.
+2025-12-03 11:26:37,561 - INFO - ==========================================
+2025-12-03 11:26:37,561 - INFO - Starting training for Subject 3
+2025-12-03 11:26:37,561 - INFO - ==========================================
+2025-12-03 11:26:37,561 - INFO - Loading data for Subject 3...
+2025-12-03 11:26:37,936 - INFO - Mode: Within-subject split on T file (Test Ratio: 0.2)
+2025-12-03 11:26:37,937 - INFO - Split sizes: Train=231, Test=57
+2025-12-03 11:26:37,953 - INFO - Train Data: X=(231, 22, 1000), y=(231,)
+2025-12-03 11:26:37,953 - INFO - Test Data: X=(57, 22, 1000), y=(57,)
+2025-12-03 11:26:37,954 - INFO - Initializing model...
+2025-12-03 11:26:37,954 - INFO - Fitting model (this may take a while)...
+2025-12-03 11:26:37,954 - INFO - GPU Acceleration Enabled.
+2025-12-03 11:26:43,944 - ERROR - Failed to train subject 3: DivCSP currently supports binary classification only.
+joblib.externals.loky.process_executor._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\externals\loky\process_executor.py", line 490, in _process_worker
+    r = call_item()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\externals\loky\process_executor.py", line 291, in __call__
+    return self.fn(*self.args, **self.kwargs)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 607, in __call__
+    return [func(*args, **kwargs) for func, args, kwargs in self.items]
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 607, in <listcomp>
+    return [func(*args, **kwargs) for func, args, kwargs in self.items]
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\feature_selection.py", line 82, in evaluate_single_sfts_lobo
+    divcsp.fit(X_sfts_all[trial_train], y[trial_train])
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\divcsp.py", line 65, in fit
+    raise ValueError("DivCSP currently supports binary classification only.")
+ValueError: DivCSP currently supports binary classification only.
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_train.py", line 150, in main
+    run_experiment_for_subject(sub, args.output_dir)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_train.py", line 94, in run_experiment_for_subject
+    model.fit(ds_train)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\model.py", line 64, in fit
+    scores_sorted = rank_all_sfts(
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\feature_selection.py", line 124, in rank_all_sfts
+    results = Parallel(n_jobs=n_jobs)(
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 2072, in __call__
+    return output if self.return_generator else list(output)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 1682, in _get_outputs
+    yield from self._retrieve()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 1784, in _retrieve
+    self._raise_error_fast()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 1859, in _raise_error_fast
+    error_job.get_result(self.timeout)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 758, in get_result
+    return self._return_or_raise()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 773, in _return_or_raise
+    raise self._result
+ValueError: DivCSP currently supports binary classification only.
+2025-12-03 11:26:43,953 - INFO - ==========================================
+2025-12-03 11:26:43,953 - INFO - Starting training for Subject 4
+2025-12-03 11:26:43,954 - INFO - ==========================================
+2025-12-03 11:26:43,954 - INFO - Loading data for Subject 4...
+2025-12-03 11:26:44,292 - INFO - Mode: Within-subject split on T file (Test Ratio: 0.2)
+2025-12-03 11:26:44,293 - INFO - Split sizes: Train=231, Test=57
+2025-12-03 11:26:44,305 - INFO - Train Data: X=(231, 22, 1000), y=(231,)
+2025-12-03 11:26:44,305 - INFO - Test Data: X=(57, 22, 1000), y=(57,)
+2025-12-03 11:26:44,306 - INFO - Initializing model...
+2025-12-03 11:26:44,306 - INFO - Fitting model (this may take a while)...
+2025-12-03 11:26:44,306 - INFO - GPU Acceleration Enabled.
+2025-12-03 11:26:49,934 - ERROR - Failed to train subject 4: DivCSP currently supports binary classification only.
+joblib.externals.loky.process_executor._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\externals\loky\process_executor.py", line 490, in _process_worker
+    r = call_item()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\externals\loky\process_executor.py", line 291, in __call__
+    return self.fn(*self.args, **self.kwargs)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 607, in __call__
+    return [func(*args, **kwargs) for func, args, kwargs in self.items]
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 607, in <listcomp>
+    return [func(*args, **kwargs) for func, args, kwargs in self.items]
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\feature_selection.py", line 82, in evaluate_single_sfts_lobo
+    divcsp.fit(X_sfts_all[trial_train], y[trial_train])
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\divcsp.py", line 65, in fit
+    raise ValueError("DivCSP currently supports binary classification only.")
+ValueError: DivCSP currently supports binary classification only.
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_train.py", line 150, in main
+    run_experiment_for_subject(sub, args.output_dir)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_train.py", line 94, in run_experiment_for_subject
+    model.fit(ds_train)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\model.py", line 64, in fit
+    scores_sorted = rank_all_sfts(
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\feature_selection.py", line 124, in rank_all_sfts
+    results = Parallel(n_jobs=n_jobs)(
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 2072, in __call__
+    return output if self.return_generator else list(output)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 1682, in _get_outputs
+    yield from self._retrieve()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 1784, in _retrieve
+    self._raise_error_fast()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 1859, in _raise_error_fast
+    error_job.get_result(self.timeout)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 758, in get_result
+    return self._return_or_raise()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 773, in _return_or_raise
+    raise self._result
+ValueError: DivCSP currently supports binary classification only.
+2025-12-03 11:26:49,945 - INFO - ==========================================
+2025-12-03 11:26:49,945 - INFO - Starting training for Subject 5
+2025-12-03 11:26:49,946 - INFO - ==========================================
+2025-12-03 11:26:49,946 - INFO - Loading data for Subject 5...
+2025-12-03 11:26:50,332 - INFO - Mode: Within-subject split on T file (Test Ratio: 0.2)
+2025-12-03 11:26:50,332 - INFO - Split sizes: Train=231, Test=57
+2025-12-03 11:26:50,344 - INFO - Train Data: X=(231, 22, 1000), y=(231,)
+2025-12-03 11:26:50,345 - INFO - Test Data: X=(57, 22, 1000), y=(57,)
+2025-12-03 11:26:50,345 - INFO - Initializing model...
+2025-12-03 11:26:50,345 - INFO - Fitting model (this may take a while)...
+2025-12-03 11:26:50,345 - INFO - GPU Acceleration Enabled.
+2025-12-03 11:26:55,860 - ERROR - Failed to train subject 5: DivCSP currently supports binary classification only.
+joblib.externals.loky.process_executor._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\externals\loky\process_executor.py", line 490, in _process_worker
+    r = call_item()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\externals\loky\process_executor.py", line 291, in __call__
+    return self.fn(*self.args, **self.kwargs)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 607, in __call__
+    return [func(*args, **kwargs) for func, args, kwargs in self.items]
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 607, in <listcomp>
+    return [func(*args, **kwargs) for func, args, kwargs in self.items]
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\feature_selection.py", line 82, in evaluate_single_sfts_lobo
+    divcsp.fit(X_sfts_all[trial_train], y[trial_train])
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\divcsp.py", line 65, in fit
+    raise ValueError("DivCSP currently supports binary classification only.")
+ValueError: DivCSP currently supports binary classification only.
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_train.py", line 150, in main
+    run_experiment_for_subject(sub, args.output_dir)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_train.py", line 94, in run_experiment_for_subject
+    model.fit(ds_train)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\model.py", line 64, in fit
+    scores_sorted = rank_all_sfts(
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\feature_selection.py", line 124, in rank_all_sfts
+    results = Parallel(n_jobs=n_jobs)(
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 2072, in __call__
+    return output if self.return_generator else list(output)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 1682, in _get_outputs
+    yield from self._retrieve()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 1784, in _retrieve
+    self._raise_error_fast()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 1859, in _raise_error_fast
+    error_job.get_result(self.timeout)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 758, in get_result
+    return self._return_or_raise()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 773, in _return_or_raise
+    raise self._result
+ValueError: DivCSP currently supports binary classification only.
+2025-12-03 11:26:55,870 - INFO - ==========================================
+2025-12-03 11:26:55,870 - INFO - Starting training for Subject 6
+2025-12-03 11:26:55,870 - INFO - ==========================================
+2025-12-03 11:26:55,870 - INFO - Loading data for Subject 6...
+2025-12-03 11:26:56,246 - INFO - Mode: Within-subject split on T file (Test Ratio: 0.2)
+2025-12-03 11:26:56,246 - INFO - Split sizes: Train=231, Test=57
+2025-12-03 11:26:56,257 - INFO - Train Data: X=(231, 22, 1000), y=(231,)
+2025-12-03 11:26:56,258 - INFO - Test Data: X=(57, 22, 1000), y=(57,)
+2025-12-03 11:26:56,258 - INFO - Initializing model...
+2025-12-03 11:26:56,258 - INFO - Fitting model (this may take a while)...
+2025-12-03 11:26:56,258 - INFO - GPU Acceleration Enabled.
+2025-12-03 11:27:01,810 - ERROR - Failed to train subject 6: DivCSP currently supports binary classification only.
+joblib.externals.loky.process_executor._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\externals\loky\process_executor.py", line 490, in _process_worker
+    r = call_item()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\externals\loky\process_executor.py", line 291, in __call__
+    return self.fn(*self.args, **self.kwargs)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 607, in __call__
+    return [func(*args, **kwargs) for func, args, kwargs in self.items]
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 607, in <listcomp>
+    return [func(*args, **kwargs) for func, args, kwargs in self.items]
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\feature_selection.py", line 82, in evaluate_single_sfts_lobo
+    divcsp.fit(X_sfts_all[trial_train], y[trial_train])
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\divcsp.py", line 65, in fit
+    raise ValueError("DivCSP currently supports binary classification only.")
+ValueError: DivCSP currently supports binary classification only.
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_train.py", line 150, in main
+    run_experiment_for_subject(sub, args.output_dir)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_train.py", line 94, in run_experiment_for_subject
+    model.fit(ds_train)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\model.py", line 64, in fit
+    scores_sorted = rank_all_sfts(
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\feature_selection.py", line 124, in rank_all_sfts
+    results = Parallel(n_jobs=n_jobs)(
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 2072, in __call__
+    return output if self.return_generator else list(output)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 1682, in _get_outputs
+    yield from self._retrieve()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 1784, in _retrieve
+    self._raise_error_fast()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 1859, in _raise_error_fast
+    error_job.get_result(self.timeout)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 758, in get_result
+    return self._return_or_raise()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 773, in _return_or_raise
+    raise self._result
+ValueError: DivCSP currently supports binary classification only.
+2025-12-03 11:27:01,819 - INFO - ==========================================
+2025-12-03 11:27:01,819 - INFO - Starting training for Subject 7
+2025-12-03 11:27:01,819 - INFO - ==========================================
+2025-12-03 11:27:01,820 - INFO - Loading data for Subject 7...
+2025-12-03 11:27:02,205 - INFO - Mode: Within-subject split on T file (Test Ratio: 0.2)
+2025-12-03 11:27:02,206 - INFO - Split sizes: Train=231, Test=57
+2025-12-03 11:27:02,217 - INFO - Train Data: X=(231, 22, 1000), y=(231,)
+2025-12-03 11:27:02,218 - INFO - Test Data: X=(57, 22, 1000), y=(57,)
+2025-12-03 11:27:02,218 - INFO - Initializing model...
+2025-12-03 11:27:02,218 - INFO - Fitting model (this may take a while)...
+2025-12-03 11:27:02,218 - INFO - GPU Acceleration Enabled.
+2025-12-03 11:27:09,964 - ERROR - Failed to train subject 7: DivCSP currently supports binary classification only.
+joblib.externals.loky.process_executor._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\externals\loky\process_executor.py", line 490, in _process_worker
+    r = call_item()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\externals\loky\process_executor.py", line 291, in __call__
+    return self.fn(*self.args, **self.kwargs)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 607, in __call__
+    return [func(*args, **kwargs) for func, args, kwargs in self.items]
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 607, in <listcomp>
+    return [func(*args, **kwargs) for func, args, kwargs in self.items]
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\feature_selection.py", line 82, in evaluate_single_sfts_lobo
+    divcsp.fit(X_sfts_all[trial_train], y[trial_train])
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\divcsp.py", line 65, in fit
+    raise ValueError("DivCSP currently supports binary classification only.")
+ValueError: DivCSP currently supports binary classification only.
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_train.py", line 150, in main
+    run_experiment_for_subject(sub, args.output_dir)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_train.py", line 94, in run_experiment_for_subject
+    model.fit(ds_train)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\model.py", line 64, in fit
+    scores_sorted = rank_all_sfts(
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\feature_selection.py", line 124, in rank_all_sfts
+    results = Parallel(n_jobs=n_jobs)(
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 2072, in __call__
+    return output if self.return_generator else list(output)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 1682, in _get_outputs
+    yield from self._retrieve()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 1784, in _retrieve
+    self._raise_error_fast()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 1859, in _raise_error_fast
+    error_job.get_result(self.timeout)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 758, in get_result
+    return self._return_or_raise()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 773, in _return_or_raise
+    raise self._result
+ValueError: DivCSP currently supports binary classification only.
+2025-12-03 11:27:09,974 - INFO - ==========================================
+2025-12-03 11:27:09,974 - INFO - Starting training for Subject 8
+2025-12-03 11:27:09,974 - INFO - ==========================================
+2025-12-03 11:27:09,975 - INFO - Loading data for Subject 8...
+2025-12-03 11:27:10,358 - INFO - Mode: Within-subject split on T file (Test Ratio: 0.2)
+2025-12-03 11:27:10,358 - INFO - Split sizes: Train=231, Test=57
+2025-12-03 11:27:10,371 - INFO - Train Data: X=(231, 22, 1000), y=(231,)
+2025-12-03 11:27:10,371 - INFO - Test Data: X=(57, 22, 1000), y=(57,)
+2025-12-03 11:27:10,371 - INFO - Initializing model...
+2025-12-03 11:27:10,371 - INFO - Fitting model (this may take a while)...
+2025-12-03 11:27:10,372 - INFO - GPU Acceleration Enabled.
+2025-12-03 11:27:16,323 - ERROR - Failed to train subject 8: DivCSP currently supports binary classification only.
+joblib.externals.loky.process_executor._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\externals\loky\process_executor.py", line 490, in _process_worker
+    r = call_item()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\externals\loky\process_executor.py", line 291, in __call__
+    return self.fn(*self.args, **self.kwargs)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 607, in __call__
+    return [func(*args, **kwargs) for func, args, kwargs in self.items]
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 607, in <listcomp>
+    return [func(*args, **kwargs) for func, args, kwargs in self.items]
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\feature_selection.py", line 82, in evaluate_single_sfts_lobo
+    divcsp.fit(X_sfts_all[trial_train], y[trial_train])
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\divcsp.py", line 65, in fit
+    raise ValueError("DivCSP currently supports binary classification only.")
+ValueError: DivCSP currently supports binary classification only.
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_train.py", line 150, in main
+    run_experiment_for_subject(sub, args.output_dir)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_train.py", line 94, in run_experiment_for_subject
+    model.fit(ds_train)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\model.py", line 64, in fit
+    scores_sorted = rank_all_sfts(
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\feature_selection.py", line 124, in rank_all_sfts
+    results = Parallel(n_jobs=n_jobs)(
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 2072, in __call__
+    return output if self.return_generator else list(output)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 1682, in _get_outputs
+    yield from self._retrieve()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 1784, in _retrieve
+    self._raise_error_fast()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 1859, in _raise_error_fast
+    error_job.get_result(self.timeout)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 758, in get_result
+    return self._return_or_raise()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 773, in _return_or_raise
+    raise self._result
+ValueError: DivCSP currently supports binary classification only.
+2025-12-03 11:27:16,333 - INFO - ==========================================
+2025-12-03 11:27:16,334 - INFO - Starting training for Subject 9
+2025-12-03 11:27:16,334 - INFO - ==========================================
+2025-12-03 11:27:16,334 - INFO - Loading data for Subject 9...
+2025-12-03 11:27:16,725 - INFO - Mode: Within-subject split on T file (Test Ratio: 0.2)
+2025-12-03 11:27:16,725 - INFO - Split sizes: Train=231, Test=57
+2025-12-03 11:27:16,739 - INFO - Train Data: X=(231, 22, 1000), y=(231,)
+2025-12-03 11:27:16,739 - INFO - Test Data: X=(57, 22, 1000), y=(57,)
+2025-12-03 11:27:16,739 - INFO - Initializing model...
+2025-12-03 11:27:16,740 - INFO - Fitting model (this may take a while)...
+2025-12-03 11:27:16,740 - INFO - GPU Acceleration Enabled.
+2025-12-03 11:27:22,975 - ERROR - Failed to train subject 9: DivCSP currently supports binary classification only.
+joblib.externals.loky.process_executor._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\externals\loky\process_executor.py", line 490, in _process_worker
+    r = call_item()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\externals\loky\process_executor.py", line 291, in __call__
+    return self.fn(*self.args, **self.kwargs)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 607, in __call__
+    return [func(*args, **kwargs) for func, args, kwargs in self.items]
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 607, in <listcomp>
+    return [func(*args, **kwargs) for func, args, kwargs in self.items]
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\feature_selection.py", line 82, in evaluate_single_sfts_lobo
+    divcsp.fit(X_sfts_all[trial_train], y[trial_train])
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\divcsp.py", line 65, in fit
+    raise ValueError("DivCSP currently supports binary classification only.")
+ValueError: DivCSP currently supports binary classification only.
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_train.py", line 150, in main
+    run_experiment_for_subject(sub, args.output_dir)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_train.py", line 94, in run_experiment_for_subject
+    model.fit(ds_train)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\model.py", line 64, in fit
+    scores_sorted = rank_all_sfts(
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\feature_selection.py", line 124, in rank_all_sfts
+    results = Parallel(n_jobs=n_jobs)(
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 2072, in __call__
+    return output if self.return_generator else list(output)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 1682, in _get_outputs
+    yield from self._retrieve()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 1784, in _retrieve
+    self._raise_error_fast()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 1859, in _raise_error_fast
+    error_job.get_result(self.timeout)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 758, in get_result
+    return self._return_or_raise()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 773, in _return_or_raise
+    raise self._result
+ValueError: DivCSP currently supports binary classification only.
+2025-12-03 11:27:22,986 - INFO - Execution finished at: 2025-12-03 11:27:22.986023
+2025-12-03 11:27:22,986 - INFO - Total execution time: 0:00:59.589183

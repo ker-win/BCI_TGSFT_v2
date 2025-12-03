@@ -9,7 +9,7 @@ import sys
 from sklearn.metrics import accuracy_score
 
 from config import cfg
-from data_loader import load_subject_data, split_train_test_by_blocks, filter_dataset
+from data_loader import load_subject_data, make_splits, subset_dataset
 from model import FGSFTMIModel
 
 def setup_logging(output_dir):
@@ -28,59 +28,81 @@ def setup_logging(output_dir):
     )
     logging.info(f"Logging started. Saving to {log_file}")
 
-def train_subject(subject_id, output_dir):
+def run_experiment_for_subject(subject_id, output_dir):
     logging.info(f"==========================================")
     logging.info(f"Starting training for Subject {subject_id}")
     logging.info(f"==========================================")
     
+    # 1. Load Data
     logging.info(f"Loading data for Subject {subject_id}...")
     try:
-        dataset = load_subject_data(subject_id)
+        ds_T, meta_T = load_subject_data(subject_id, file_suffix='T')
     except FileNotFoundError as e:
         logging.error(f"Data for subject {subject_id} not found: {e}")
         return
 
-    logging.info(f"Data loaded: X={dataset.X.shape}, y={dataset.y.shape}, blocks={np.unique(dataset.blocks)}")
+    ds_train = None
+    ds_test = None
+
+    if cfg.exp_cfg.use_E_as_test:
+        logging.info("Mode: Train on T file, Test on E file.")
+        try:
+            ds_E, meta_E = load_subject_data(subject_id, file_suffix='E')
+            if len(ds_E.X) == 0:
+                logging.warning(f"E file for subject {subject_id} is empty (no known labels). Falling back to splitting T file.")
+                cfg.exp_cfg.use_E_as_test = False
+            else:
+                ds_train = ds_T
+                ds_test = ds_E
+        except FileNotFoundError:
+            logging.warning(f"E file for subject {subject_id} not found. Falling back to splitting T file.")
+            cfg.exp_cfg.use_E_as_test = False
+
     
+    if not cfg.exp_cfg.use_E_as_test:
+        logging.info(f"Mode: Within-subject split on T file (Test Ratio: {cfg.exp_cfg.test_ratio})")
+        splits = make_splits(
+            meta_T, 
+            mode=cfg.exp_cfg.mode, 
+            test_ratio=cfg.exp_cfg.test_ratio, 
+            random_state=cfg.exp_cfg.random_state
+        )
+        # Assuming single fold for now as per make_splits implementation
+        split = splits[0]
+        train_idx = split['train']
+        test_idx = split['test']
+        
+        logging.info(f"Split sizes: Train={len(train_idx)}, Test={len(test_idx)}")
+        
+        ds_train = subset_dataset(ds_T, train_idx)
+        ds_test = subset_dataset(ds_T, test_idx)
+
+    logging.info(f"Train Data: X={ds_train.X.shape}, y={ds_train.y.shape}")
+    logging.info(f"Test Data: X={ds_test.X.shape}, y={ds_test.y.shape}")
+
     # Filter classes
     logging.info(f"Filtering classes to {cfg.selected_labels}...")
-    dataset = filter_dataset(dataset, cfg.selected_labels)
-    logging.info(f"Filtered data: X={dataset.X.shape}, y={dataset.y.shape}")
-    
-    # Simple Train/Test split for demonstration
-    blocks = np.unique(dataset.blocks)
-    if len(blocks) > 1:
-        test_block = blocks[-1]
-        logging.info(f"Holding out Block {test_block} for testing.")
-        ds_train, ds_test = split_train_test_by_blocks(dataset, test_block)
-    else:
-        logging.info("Only 1 block found. Using random 80/20 split.")
-        # Random split
-        n_trials = len(dataset.y)
-        perm = np.random.permutation(n_trials)
-        n_train = int(0.8 * n_trials)
-        train_idx = perm[:n_train]
-        test_idx = perm[n_train:]
-        
-        def subset(idx):
-            return type(dataset)(
-                X=dataset.X[idx],
-                y=dataset.y[idx],
-                blocks=dataset.blocks[idx],
-                ch_names=dataset.ch_names,
-                fs=dataset.fs
-            )
-        ds_train = subset(train_idx)
-        ds_test = subset(test_idx)
+    from data_loader import filter_dataset
+    ds_train = filter_dataset(ds_train, cfg.selected_labels)
+    ds_test = filter_dataset(ds_test, cfg.selected_labels)
+    logging.info(f"Filtered Train Data: X={ds_train.X.shape}, y={ds_train.y.shape}")
+    logging.info(f"Filtered Test Data: X={ds_test.X.shape}, y={ds_test.y.shape}")
 
-    # Train
+    # 2. Train Model
+
+    # Note: Preprocessing is now handled inside model.fit() on the training data
+    # and model.predict() will apply the same transformation.
+    
     logging.info("Initializing model...")
     model = FGSFTMIModel()
     
     logging.info("Fitting model (this may take a while)...")
+    if cfg.train_cfg.use_gpu:
+        logging.info("GPU Acceleration Enabled.")
+    
     model.fit(ds_train)
     
-    # Evaluate on held-out set
+    # 3. Evaluate
     logging.info("Evaluating on test set...")
     y_pred = model.predict(ds_test)
     acc = accuracy_score(ds_test.y, y_pred)
@@ -101,6 +123,15 @@ def main():
     parser.add_argument("--log_dir", type=str, default="logs", help="Directory to save logs")
     parser.add_argument("--n_jobs", type=int, default=-1, help="Number of parallel jobs")
     
+    # Experiment Config Args
+    parser.add_argument("--mode", type=str, default="within-subject", help="Experiment mode")
+    parser.add_argument("--use_E_as_test", action="store_true", help="Use E file as test set")
+    parser.add_argument("--no_E_as_test", action="store_false", dest="use_E_as_test", help="Do not use E file as test set")
+    parser.add_argument("--test_ratio", type=float, default=0.2, help="Test ratio if splitting T file")
+    parser.add_argument("--use_gpu", action="store_true", help="Enable GPU acceleration")
+    
+    parser.set_defaults(use_E_as_test=True)
+
     args = parser.parse_args()
     
     # Setup logging
@@ -113,6 +144,11 @@ def main():
     if args.data_dir:
         cfg.data_path = args.data_dir
     cfg.train_cfg.n_jobs = args.n_jobs
+    cfg.train_cfg.use_gpu = args.use_gpu
+    
+    cfg.exp_cfg.mode = args.mode
+    cfg.exp_cfg.use_E_as_test = args.use_E_as_test
+    cfg.exp_cfg.test_ratio = args.test_ratio
     
     os.makedirs(args.output_dir, exist_ok=True)
     
@@ -120,11 +156,11 @@ def main():
         logging.info("Training ALL subjects (1-9)...")
         for sub in range(1, 10):
             try:
-                train_subject(sub, args.output_dir)
+                run_experiment_for_subject(sub, args.output_dir)
             except Exception as e:
                 logging.error(f"Failed to train subject {sub}: {e}", exc_info=True)
     else:
-        train_subject(args.subject, args.output_dir)
+        run_experiment_for_subject(args.subject, args.output_dir)
 
     end_time = datetime.datetime.now()
     duration = end_time - start_time

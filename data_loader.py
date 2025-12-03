@@ -14,7 +14,16 @@ class Dataset:
     ch_names: list         # channel names
     fs: float              # sampling rate
 
-def load_subject_data(subject_id: int, root_dir: str = None, file_suffix: str = 'T') -> Dataset:
+@dataclass
+class TrialInfo:
+    idx: int           # Index in Dataset.X
+    subject_id: int
+    session_id: int    # block_id / run_id
+    label: int
+
+
+def load_subject_data(subject_id: int, root_dir: str = None, file_suffix: str = 'T') -> Tuple[Dataset, List[TrialInfo]]:
+
     """
     Loads raw data for a single subject from BCI Competition IV 2a dataset.
     
@@ -135,25 +144,60 @@ def load_subject_data(subject_id: int, root_dir: str = None, file_suffix: str = 
     y = np.array(labels)
     blocks = np.array(block_ids)
     
-    return Dataset(X=X, y=y, blocks=blocks, ch_names=ch_names, fs=fs)
+    dataset = Dataset(X=X, y=y, blocks=blocks, ch_names=ch_names, fs=fs)
+    
+    trials_meta = []
+    for i in range(len(y)):
+        trials_meta.append(TrialInfo(
+            idx=i,
+            subject_id=subject_id,
+            session_id=int(blocks[i]),
+            label=int(y[i]),
+        ))
+    
+    return dataset, trials_meta
 
-def split_train_test_by_blocks(dataset: Dataset, test_block: int) -> Tuple[Dataset, Dataset]:
+
+def subset_dataset(dataset: Dataset, indices: List[int] | np.ndarray) -> Dataset:
     """
-    Splits the dataset into train and test sets based on block ID (LOBO).
+    Creates a subset of the dataset based on indices.
     """
-    mask_test = dataset.blocks == test_block
-    mask_train = ~mask_test
+    return Dataset(
+        X=dataset.X[indices],
+        y=dataset.y[indices],
+        blocks=dataset.blocks[indices],
+        ch_names=dataset.ch_names,
+        fs=dataset.fs,
+    )
 
-    def subset(mask):
-        return Dataset(
-            X=dataset.X[mask],
-            y=dataset.y[mask],
-            blocks=dataset.blocks[mask],
-            ch_names=dataset.ch_names,
-            fs=dataset.fs,
-        )
+def make_splits(trials_meta: List[TrialInfo], mode: str = "within-subject", test_ratio: float = 0.2, random_state: int = 42) -> List[Dict[str, List[int]]]:
+    """
+    Generates train/val/test splits based on the mode.
+    
+    Args:
+        trials_meta: List of TrialInfo objects.
+        mode: 'within-subject' (random split).
+        test_ratio: Ratio of test set size.
+        random_state: Random seed.
+        
+    Returns:
+        List of dicts, each containing 'train', 'val', 'test' indices.
+    """
+    if mode == "within-subject":
+        rng = np.random.RandomState(random_state)
+        all_idx = np.arange(len(trials_meta))
+        rng.shuffle(all_idx)
 
-    return subset(mask_train), subset(mask_test)
+        n_test = int(len(all_idx) * test_ratio)
+        test_idx = all_idx[:n_test]
+        train_idx = all_idx[n_test:]
+        
+        # For now, val is empty or can be a subset of train if needed later
+        return [{"train": train_idx.tolist(), "val": [], "test": test_idx.tolist()}]
+    
+    else:
+        raise NotImplementedError(f"Mode {mode} not implemented yet.")
+
 
 def filter_dataset(dataset: Dataset, labels: List[int]) -> Dataset:
     """

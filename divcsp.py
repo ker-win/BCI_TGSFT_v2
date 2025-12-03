@@ -141,6 +141,21 @@ class DivCSP:
     def get_params(self) -> DivCSPParams:
         return DivCSPParams(filters_=self.filters_, patterns_=self.patterns_)
 
-    def set_params(self, params: DivCSPParams):
-        self.filters_ = params.filters_
-        self.patterns_ = params.patterns_
+    def set_params(self, params: DivCSPParams | dict):
+        if isinstance(params, dict):
+            try:
+                self.filters_ = params['filters_']
+                self.patterns_ = params.get('patterns_')
+            except KeyError:
+                # Fallback for potential key mismatch (e.g. without underscore)
+                if 'filters' in params:
+                    self.filters_ = params['filters']
+                    self.patterns_ = params.get('patterns')
+                else:
+                    print(f"Error: params keys: {params.keys()}")
+                    raise
+        else:
+            self.filters_ = params.filters_
+            self.patterns_ = params.patterns_
+
+
