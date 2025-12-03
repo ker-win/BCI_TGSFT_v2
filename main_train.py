@@ -106,6 +106,9 @@ def main():
     # Setup logging
     setup_logging(args.log_dir)
     
+    start_time = datetime.datetime.now()
+    logging.info(f"Execution started at: {start_time}")
+
     # Update config
     if args.data_dir:
         cfg.data_path = args.data_dir
@@ -122,6 +125,11 @@ def main():
                 logging.error(f"Failed to train subject {sub}: {e}", exc_info=True)
     else:
         train_subject(args.subject, args.output_dir)
+
+    end_time = datetime.datetime.now()
+    duration = end_time - start_time
+    logging.info(f"Execution finished at: {end_time}")
+    logging.info(f"Total execution time: {duration}")
 
 if __name__ == "__main__":
     main()

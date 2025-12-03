@@ -128,27 +128,52 @@ def _precalc_single_sfts(
     X_fband: Dict[int, np.ndarray],
     channel_groups: List[ChannelGroup],
     time_windows: List[TimeWindow],
-    y: np.ndarray,
-) -> Tuple[int, DivCSPParams, np.ndarray]:
+    dataset: Dataset,
+) -> Tuple[int, Dict[str, DivCSPParams], Dict[str, np.ndarray]]:
     """
     Helper for parallel pre-calculation of CSP features.
+    Returns:
+        s_id
+        csp_params_map: {'all': params, block_id: params}
+        feats_map: {'all': feats, block_id: feats}
     """
     spec = next(s for s in sfts_specs if s.id == s_id)
     X_sfts = get_sfts_data(X_fband, spec, channel_groups, time_windows)
+    y = dataset.y
+    blocks = lobo_blocks(dataset)
     
-    divcsp = DivCSP()
-    divcsp.fit(X_sfts, y)
+    csp_params_map = {}
+    feats_map = {}
     
-    params = divcsp.get_params()
-    feats = divcsp.transform(X_sfts)
+    # 1. Fit on ALL data (for final model)
+    divcsp_all = DivCSP()
+    divcsp_all.fit(X_sfts, y)
+    csp_params_map['all'] = divcsp_all.get_params()
+    feats_map['all'] = divcsp_all.transform(X_sfts)
     
-    return s_id, params, feats
+    # 2. Fit for each LOBO fold (to avoid leakage)
+    for test_block in blocks:
+        mask_test = dataset.blocks == test_block
+        mask_train = ~mask_test
+        
+        if np.sum(mask_train) == 0:
+            continue
+            
+        divcsp_fold = DivCSP()
+        divcsp_fold.fit(X_sfts[mask_train], y[mask_train])
+        
+        # Transform ALL data using this fold's CSP
+        # We will slice it later in evaluation
+        feats_map[test_block] = divcsp_fold.transform(X_sfts)
+        csp_params_map[test_block] = divcsp_fold.get_params()
+    
+    return s_id, csp_params_map, feats_map
 
 def _evaluate_ensemble_step(
     j: int,
     top_j_ids: List[int],
-    feats_all: Dict[int, np.ndarray],
-    csp_params_all: Dict[int, DivCSPParams],
+    feats_map_all: Dict[int, Dict],
+    csp_params_map_all: Dict[int, Dict],
     dataset: Dataset,
     y: np.ndarray,
     blocks: List[int],
@@ -156,12 +181,8 @@ def _evaluate_ensemble_step(
     """
     Helper for parallel evaluation of an ensemble step.
     """
-    # LOBO CV on concatenated features
+    # LOBO CV
     acc_list = []
-    
-    # Pre-concatenate features for efficiency
-    # (n_trials, j * d)
-    F_all_j = np.concatenate([feats_all[sid] for sid in top_j_ids], axis=1)
     
     for test_block in blocks:
         mask_test = dataset.blocks == test_block
@@ -171,28 +192,43 @@ def _evaluate_ensemble_step(
         
         if len(idx_train) == 0 or len(idx_test) == 0:
             continue
+            
+        # Construct features for this fold using CSP trained WITHOUT test_block
+        # For each s_id, we take feats_map[s_id][test_block]
+        fold_feats_list = []
+        for sid in top_j_ids:
+            if test_block in feats_map_all[sid]:
+                fold_feats_list.append(feats_map_all[sid][test_block])
+            else:
+                # Fallback if block not found (shouldn't happen)
+                fold_feats_list.append(feats_map_all[sid]['all'])
+                
+        F_fold = np.concatenate(fold_feats_list, axis=1)
 
         clf = LinearSVC(
             random_state=cfg.train_cfg.random_state,
             dual=cfg.svm_cfg.dual,
             max_iter=cfg.svm_cfg.max_iter
         )
-        clf.fit(F_all_j[idx_train], y[idx_train])
-        y_pred = clf.predict(F_all_j[idx_test])
+        clf.fit(F_fold[idx_train], y[idx_train])
+        y_pred = clf.predict(F_fold[idx_test])
         acc_list.append(accuracy_score(y[idx_test], y_pred))
 
     mean_acc = float(np.mean(acc_list)) if acc_list else 0.0
     
-    # Train final model on ALL data
+    # Train final model on ALL data using 'all' CSP features
+    all_feats_list = [feats_map_all[sid]['all'] for sid in top_j_ids]
+    F_all = np.concatenate(all_feats_list, axis=1)
+    
     clf_final = LinearSVC(
         random_state=cfg.train_cfg.random_state,
         dual=cfg.svm_cfg.dual,
         max_iter=cfg.svm_cfg.max_iter
     )
-    clf_final.fit(F_all_j, y)
+    clf_final.fit(F_all, y)
     
-    # Subset csp_params for this member
-    member_csp_params = {sid: csp_params_all[sid] for sid in top_j_ids}
+    # Store 'all' CSP params for the final model
+    member_csp_params = {sid: csp_params_map_all[sid]['all'] for sid in top_j_ids}
     
     member = EnsembleMember(
         sfts_ids=top_j_ids,
@@ -224,35 +260,31 @@ def build_ensemble(
     step = D
     
     # Identify all unique SFTS IDs needed
-    # We iterate j from step to max_j.
-    # The largest set is top_max_j, which includes all sfts in scores_sorted.
     all_sfts_ids = [s.sfts_id for s in scores_sorted]
     
-    print(f"Pre-calculating features for {len(all_sfts_ids)} candidates in parallel...")
+    print(f"Pre-calculating features for {len(all_sfts_ids)} candidates in parallel (with LOBO CSP)...")
     n_jobs = cfg.train_cfg.n_jobs
     
     # 1. Parallel Pre-calculation
     precalc_results = Parallel(n_jobs=n_jobs)(
         delayed(_precalc_single_sfts)(
-            sid, sfts_specs, X_fband, channel_groups, time_windows, y
+            sid, sfts_specs, X_fband, channel_groups, time_windows, dataset
         ) for sid in tqdm(all_sfts_ids, desc="Pre-calc Features")
     )
     
-    # Store in dictionaries for fast access
-    csp_params_all: Dict[int, DivCSPParams] = {}
-    feats_all: Dict[int, np.ndarray] = {}
+    # Store in dictionaries
+    csp_params_map_all: Dict[int, Dict] = {}
+    feats_map_all: Dict[int, Dict] = {}
     
-    for sid, params, feats in precalc_results:
-        csp_params_all[sid] = params
-        feats_all[sid] = feats
+    for sid, params_map, feats_map in precalc_results:
+        csp_params_map_all[sid] = params_map
+        feats_map_all[sid] = feats_map
         
     print(f"Building ensemble (Total SFTS: {max_j}, Step: {D}) in parallel...")
     
     # 2. Parallel Ensemble Search
-    # Prepare arguments for each step
     steps = range(step, max_j + 1, step)
     
-    # We need to pass the specific list of IDs for each step
     step_args = []
     for j in steps:
         top_j_ids = [s.sfts_id for s in scores_sorted[:j]]
@@ -260,20 +292,13 @@ def build_ensemble(
         
     results = Parallel(n_jobs=n_jobs)(
         delayed(_evaluate_ensemble_step)(
-            j, top_j_ids, feats_all, csp_params_all, dataset, y, blocks
+            j, top_j_ids, feats_map_all, csp_params_map_all, dataset, y, blocks
         ) for j, top_j_ids in tqdm(step_args, desc="Building Ensemble")
     )
-    
-    # Sort results by j to maintain order if needed, or just collect
-    # Actually we need to sort by accuracy to pick top K
-    
-    # results is a list of (j, mean_acc, member)
-    # We can just collect them
     
     members_with_acc = []
     for j, acc, member in results:
         members_with_acc.append((acc, member))
-        # print(f"  j={j}: Acc={acc:.4f}") # Can't print easily in parallel
         
     # Sort by accuracy descending
     members_with_acc.sort(key=lambda x: x[0], reverse=True)

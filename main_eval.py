@@ -34,6 +34,7 @@ def main():
     parser.add_argument("--model_path", type=str, required=True, help="Path to trained model")
     parser.add_argument("--data_dir", type=str, default=None, help="Path to dataset")
     parser.add_argument("--log_dir", type=str, default="logs", help="Directory to save logs")
+    parser.add_argument("--use_test_data", action="store_true", help="Use evaluation dataset (E files) instead of splitting training data")
     
     args = parser.parse_args()
     
@@ -44,8 +45,10 @@ def main():
         cfg.data_path = args.data_dir
         
     logging.info(f"Loading data for Subject {args.subject}...")
+    
+    file_suffix = 'E' if args.use_test_data else 'T'
     try:
-        dataset = load_subject_data(args.subject)
+        dataset = load_subject_data(args.subject, file_suffix=file_suffix)
     except FileNotFoundError as e:
         logging.error(e)
         return
@@ -54,18 +57,22 @@ def main():
     logging.info(f"Filtering classes to {cfg.selected_labels}...")
     dataset = filter_dataset(dataset, cfg.selected_labels)
 
-    # We need to know which part was test set. 
-    # Ideally, we should save the split info or use a standard split.
-    # For this demo, we assume the same split strategy as main_train: last block is test.
-    blocks = np.unique(dataset.blocks)
-    if len(blocks) > 1:
-        test_block = blocks[-1]
-        logging.info(f"Using Block {test_block} as test set.")
-        _, ds_test = split_train_test_by_blocks(dataset, test_block)
-    else:
-        logging.info("Only 1 block found. Cannot replicate random split without seed info.")
-        logging.info("Evaluating on ALL data.")
+    if args.use_test_data:
+        logging.info("Using Evaluation dataset (E file) as test set.")
         ds_test = dataset
+    else:
+        # We need to know which part was test set. 
+        # Ideally, we should save the split info or use a standard split.
+        # For this demo, we assume the same split strategy as main_train: last block is test.
+        blocks = np.unique(dataset.blocks)
+        if len(blocks) > 1:
+            test_block = blocks[-1]
+            logging.info(f"Using Block {test_block} as test set.")
+            _, ds_test = split_train_test_by_blocks(dataset, test_block)
+        else:
+            logging.info("Only 1 block found. Cannot replicate random split without seed info.")
+            logging.info("Evaluating on ALL data.")
+            ds_test = dataset
 
     logging.info("Loading model...")
     model = FGSFTMIModel()

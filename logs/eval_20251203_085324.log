@@ -1,0 +1,19 @@
+2025-12-03 08:53:24,443 - INFO - Logging started. Saving to logs\eval_20251203_085324.log
+2025-12-03 08:53:24,443 - INFO - Loading data for Subject 1...
+2025-12-03 08:53:24,848 - INFO - Filtering classes to [0, 1]...
+2025-12-03 08:53:24,858 - INFO - Using Block 8 as test set.
+2025-12-03 08:53:24,864 - INFO - Loading model...
+2025-12-03 08:53:24,882 - INFO - Predicting...
+2025-12-03 08:53:26,851 - INFO - Accuracy: 0.6667
+2025-12-03 08:53:26,851 - INFO - 
+Classification Report:
+2025-12-03 08:53:26,864 - INFO - 
+              precision    recall  f1-score   support
+
+           0       0.64      0.75      0.69        12
+           1       0.70      0.58      0.64        12
+
+    accuracy                           0.67        24
+   macro avg       0.67      0.67      0.66        24
+weighted avg       0.67      0.67      0.66        24
+

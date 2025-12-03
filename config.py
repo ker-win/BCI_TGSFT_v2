@@ -34,7 +34,7 @@ class TrainingConfig:
 
 @dataclass
 class SVMConfig:
-    max_iter: int = 10000
+    max_iter: int = 100000
     dual: str = "auto"
 
 @dataclass

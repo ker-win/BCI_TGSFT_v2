@@ -14,13 +14,14 @@ class Dataset:
     ch_names: list         # channel names
     fs: float              # sampling rate
 
-def load_subject_data(subject_id: int, root_dir: str = None) -> Dataset:
+def load_subject_data(subject_id: int, root_dir: str = None, file_suffix: str = 'T') -> Dataset:
     """
     Loads raw data for a single subject from BCI Competition IV 2a dataset.
     
     Args:
         subject_id: Subject ID (1-9)
         root_dir: Path to the dataset directory. If None, uses cfg.data_path.
+        file_suffix: 'T' for training data, 'E' for evaluation data.
         
     Returns:
         Dataset object containing X, y, blocks, ch_names, fs.
@@ -28,7 +29,7 @@ def load_subject_data(subject_id: int, root_dir: str = None) -> Dataset:
     if root_dir is None:
         root_dir = cfg.data_path
         
-    file_path = os.path.join(root_dir, f'A0{subject_id}T.npz')
+    file_path = os.path.join(root_dir, f'A0{subject_id}{file_suffix}.npz')
     
     if not os.path.exists(file_path):
         raise FileNotFoundError(f"Data file not found: {file_path}")
