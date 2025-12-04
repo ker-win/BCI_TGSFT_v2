@@ -127,12 +127,12 @@ def load_subject_data(subject_id: int, root_dir: str = None, file_suffix: str = 
                     current_block = b_idx
             
             # Extract epoch
-            # We want enough data to crop later.
-            # Let's take 0s to 4s relative to cue.
-            # (Paper says 2-5s after stimulus? We need to be careful with timing)
-            # If we extract 0-4s, we cover the MI period.
-            t_start_sample = int(pos)
-            t_end_sample = int(pos + 4.0 * fs)
+            # We want cue+2s to cue+5s (3 seconds total)
+            mi_offset_sec = 2.0
+            trial_len_sec = cfg.trial_len_sec # Should be 3.0
+            
+            t_start_sample = int(pos + mi_offset_sec * fs)
+            t_end_sample = int(pos + (mi_offset_sec + trial_len_sec) * fs)
             
             if t_end_sample <= raw_eeg.shape[1]:
                 trial_data = raw_eeg[:, t_start_sample:t_end_sample]

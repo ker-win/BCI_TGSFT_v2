@@ -1,0 +1,91 @@
+2025-12-04 09:21:51,899 - INFO - Logging started. Saving to logs\train_20251204_092151.log
+2025-12-04 09:21:51,899 - INFO - Execution started at: 2025-12-04 09:21:51.899156
+2025-12-04 09:21:51,899 - INFO - Training ALL subjects (1-9)...
+2025-12-04 09:21:51,900 - INFO - ==========================================
+2025-12-04 09:21:51,900 - INFO - Starting training for Subject 1
+2025-12-04 09:21:51,900 - INFO - ==========================================
+2025-12-04 09:21:51,900 - INFO - Loading data for Subject 1...
+2025-12-04 09:21:52,292 - INFO - Mode: Train on T file, Test on E file.
+2025-12-04 09:21:52,678 - WARNING - E file for subject 1 is empty (no known labels). Falling back to splitting T file.
+2025-12-04 09:21:52,679 - INFO - Mode: Within-subject split on T file (Test Ratio: 0.2)
+2025-12-04 09:21:52,680 - INFO - Split sizes: Train=231, Test=57
+2025-12-04 09:21:52,688 - INFO - Train Data: X=(231, 22, 750), y=(231,)
+2025-12-04 09:21:52,688 - INFO - Test Data: X=(57, 22, 750), y=(57,)
+2025-12-04 09:21:52,689 - INFO - Filtering classes to [0, 1]...
+2025-12-04 09:21:52,697 - INFO - Filtered Train Data: X=(121, 22, 750), y=(121,)
+2025-12-04 09:21:52,697 - INFO - Filtered Test Data: X=(23, 22, 750), y=(23,)
+2025-12-04 09:21:52,698 - INFO - Initializing model...
+2025-12-04 09:21:52,698 - INFO - Fitting model (this may take a while)...
+2025-12-04 09:21:52,698 - INFO - GPU Acceleration Enabled.
+2025-12-04 10:37:21,375 - INFO - Evaluating on test set...
+2025-12-04 10:37:25,139 - INFO - Subject 1 Test Accuracy: 0.6957
+2025-12-04 10:37:25,158 - INFO - Model saved to models\subject_1_model.pkl
+2025-12-04 10:37:25,158 - INFO - Finished Subject 1
+2025-12-04 10:37:25,166 - INFO - ==========================================
+2025-12-04 10:37:25,167 - INFO - Starting training for Subject 2
+2025-12-04 10:37:25,167 - INFO - ==========================================
+2025-12-04 10:37:25,167 - INFO - Loading data for Subject 2...
+2025-12-04 10:37:25,562 - INFO - Mode: Within-subject split on T file (Test Ratio: 0.2)
+2025-12-04 10:37:25,563 - INFO - Split sizes: Train=231, Test=57
+2025-12-04 10:37:25,571 - INFO - Train Data: X=(231, 22, 750), y=(231,)
+2025-12-04 10:37:25,571 - INFO - Test Data: X=(57, 22, 750), y=(57,)
+2025-12-04 10:37:25,572 - INFO - Filtering classes to [0, 1]...
+2025-12-04 10:37:25,580 - INFO - Filtered Train Data: X=(113, 22, 750), y=(113,)
+2025-12-04 10:37:25,580 - INFO - Filtered Test Data: X=(31, 22, 750), y=(31,)
+2025-12-04 10:37:25,580 - INFO - Initializing model...
+2025-12-04 10:37:25,580 - INFO - Fitting model (this may take a while)...
+2025-12-04 10:37:25,581 - INFO - GPU Acceleration Enabled.
+2025-12-04 11:53:35,274 - INFO - Evaluating on test set...
+2025-12-04 11:53:38,567 - INFO - Subject 2 Test Accuracy: 0.6774
+2025-12-04 11:53:38,584 - INFO - Model saved to models\subject_2_model.pkl
+2025-12-04 11:53:38,585 - INFO - Finished Subject 2
+2025-12-04 11:53:38,592 - INFO - ==========================================
+2025-12-04 11:53:38,592 - INFO - Starting training for Subject 3
+2025-12-04 11:53:38,592 - INFO - ==========================================
+2025-12-04 11:53:38,592 - INFO - Loading data for Subject 3...
+2025-12-04 11:53:38,985 - INFO - Mode: Within-subject split on T file (Test Ratio: 0.2)
+2025-12-04 11:53:38,986 - INFO - Split sizes: Train=231, Test=57
+2025-12-04 11:53:38,994 - INFO - Train Data: X=(231, 22, 750), y=(231,)
+2025-12-04 11:53:38,995 - INFO - Test Data: X=(57, 22, 750), y=(57,)
+2025-12-04 11:53:38,995 - INFO - Filtering classes to [0, 1]...
+2025-12-04 11:53:39,004 - INFO - Filtered Train Data: X=(113, 22, 750), y=(113,)
+2025-12-04 11:53:39,004 - INFO - Filtered Test Data: X=(31, 22, 750), y=(31,)
+2025-12-04 11:53:39,004 - INFO - Initializing model...
+2025-12-04 11:53:39,004 - INFO - Fitting model (this may take a while)...
+2025-12-04 11:53:39,005 - INFO - GPU Acceleration Enabled.
+2025-12-04 12:50:04,246 - INFO - Evaluating on test set...
+2025-12-04 12:50:11,798 - INFO - Subject 3 Test Accuracy: 0.8710
+2025-12-04 12:50:11,817 - INFO - Model saved to models\subject_3_model.pkl
+2025-12-04 12:50:11,818 - INFO - Finished Subject 3
+2025-12-04 12:50:11,826 - INFO - ==========================================
+2025-12-04 12:50:11,827 - INFO - Starting training for Subject 4
+2025-12-04 12:50:11,827 - INFO - ==========================================
+2025-12-04 12:50:11,827 - INFO - Loading data for Subject 4...
+2025-12-04 12:50:12,179 - INFO - Mode: Within-subject split on T file (Test Ratio: 0.2)
+2025-12-04 12:50:12,180 - INFO - Split sizes: Train=231, Test=57
+2025-12-04 12:50:12,188 - INFO - Train Data: X=(231, 22, 750), y=(231,)
+2025-12-04 12:50:12,188 - INFO - Test Data: X=(57, 22, 750), y=(57,)
+2025-12-04 12:50:12,188 - INFO - Filtering classes to [0, 1]...
+2025-12-04 12:50:12,196 - INFO - Filtered Train Data: X=(113, 22, 750), y=(113,)
+2025-12-04 12:50:12,196 - INFO - Filtered Test Data: X=(31, 22, 750), y=(31,)
+2025-12-04 12:50:12,197 - INFO - Initializing model...
+2025-12-04 12:50:12,197 - INFO - Fitting model (this may take a while)...
+2025-12-04 12:50:12,197 - INFO - GPU Acceleration Enabled.
+2025-12-04 14:04:16,190 - INFO - Evaluating on test set...
+2025-12-04 14:04:20,091 - INFO - Subject 4 Test Accuracy: 0.5806
+2025-12-04 14:04:20,110 - INFO - Model saved to models\subject_4_model.pkl
+2025-12-04 14:04:20,110 - INFO - Finished Subject 4
+2025-12-04 14:04:20,119 - INFO - ==========================================
+2025-12-04 14:04:20,119 - INFO - Starting training for Subject 5
+2025-12-04 14:04:20,119 - INFO - ==========================================
+2025-12-04 14:04:20,119 - INFO - Loading data for Subject 5...
+2025-12-04 14:04:20,513 - INFO - Mode: Within-subject split on T file (Test Ratio: 0.2)
+2025-12-04 14:04:20,514 - INFO - Split sizes: Train=231, Test=57
+2025-12-04 14:04:20,523 - INFO - Train Data: X=(231, 22, 750), y=(231,)
+2025-12-04 14:04:20,523 - INFO - Test Data: X=(57, 22, 750), y=(57,)
+2025-12-04 14:04:20,523 - INFO - Filtering classes to [0, 1]...
+2025-12-04 14:04:20,530 - INFO - Filtered Train Data: X=(113, 22, 750), y=(113,)
+2025-12-04 14:04:20,530 - INFO - Filtered Test Data: X=(31, 22, 750), y=(31,)
+2025-12-04 14:04:20,530 - INFO - Initializing model...
+2025-12-04 14:04:20,531 - INFO - Fitting model (this may take a while)...
+2025-12-04 14:04:20,531 - INFO - GPU Acceleration Enabled.

@@ -53,7 +53,7 @@ class ExperimentConfig:
 @dataclass
 class GlobalConfig:
     fs: float = 250.0
-    trial_len_sec: float = 1.5  # Length of the trial to use
+    trial_len_sec: float = 3.0  # Length of the trial to use
     
     # Data paths (can be modified)
     data_path: str = "C:\\Users\\EEG_Dataset\\bcidatasetIV2a-master"
@@ -234,12 +234,12 @@ def load_subject_data(subject_id: int, root_dir: str = None, file_suffix: str = 
                     current_block = b_idx
             
             # Extract epoch
-            # We want enough data to crop later.
-            # Let's take 0s to 4s relative to cue.
-            # (Paper says 2-5s after stimulus? We need to be careful with timing)
-            # If we extract 0-4s, we cover the MI period.
-            t_start_sample = int(pos)
-            t_end_sample = int(pos + 4.0 * fs)
+            # We want cue+2s to cue+5s (3 seconds total)
+            mi_offset_sec = 2.0
+            trial_len_sec = cfg.trial_len_sec # Should be 3.0
+            
+            t_start_sample = int(pos + mi_offset_sec * fs)
+            t_end_sample = int(pos + (mi_offset_sec + trial_len_sec) * fs)
             
             if t_end_sample <= raw_eeg.shape[1]:
                 trial_data = raw_eeg[:, t_start_sample:t_end_sample]
@@ -991,23 +991,28 @@ def _precalc_single_sfts(
     
     return s_id, csp_params_map, feats_map
 
-def _evaluate_ensemble_step(
+def _evaluate_ensemble_step_lite(
     j: int,
     top_j_ids: List[int],
-    feats_map_all: Dict[int, Dict],
-    csp_params_map_all: Dict[int, Dict],
-    dataset: Dataset,
+    feats_tensor: np.ndarray,
+    block_to_idx: Dict[int, int],
+    sfts_id_to_idx: Dict[int, int],
     y: np.ndarray,
     blocks: List[int],
-) -> Tuple[int, float, EnsembleMember]:
+    dataset_blocks: np.ndarray,
+) -> Tuple[int, float]:
     """
     Helper for parallel evaluation of an ensemble step.
+    Returns only (j, mean_acc) to save memory.
     """
     # LOBO CV
     acc_list = []
     
+    # Pre-compute indices for top_j_ids
+    top_j_indices = [sfts_id_to_idx[sid] for sid in top_j_ids]
+    
     for test_block in blocks:
-        mask_test = dataset.blocks == test_block
+        mask_test = dataset_blocks == test_block
         mask_train = ~mask_test
         idx_train = np.where(mask_train)[0]
         idx_test = np.where(mask_test)[0]
@@ -1015,18 +1020,26 @@ def _evaluate_ensemble_step(
         if len(idx_train) == 0 or len(idx_test) == 0:
             continue
             
-        # Construct features for this fold using CSP trained WITHOUT test_block
-        # For each s_id, we take feats_map[s_id][test_block]
-        fold_feats_list = []
-        for sid in top_j_ids:
-            if test_block in feats_map_all[sid]:
-                fold_feats_list.append(feats_map_all[sid][test_block])
-            else:
-                # Fallback if block not found (shouldn't happen)
-                fold_feats_list.append(feats_map_all[sid]['all'])
-                
-        F_fold = np.concatenate(fold_feats_list, axis=1)
-
+        # Construct features for this fold
+        # feats_tensor shape: (n_sfts, n_blocks+1, n_trials, n_components)
+        # We need block index for test_block
+        b_idx = block_to_idx[test_block]
+        
+        # Gather features: (n_top_j, n_trials, n_components)
+        # We want to select specific SFTS (axis 0) and specific block (axis 1)
+        # Slicing: feats_tensor[top_j_indices, b_idx, :, :] -> (n_top_j, n_trials, n_components)
+        
+        # Optimization: Use fancy indexing or take slice
+        # Note: feats_tensor is large, we should be careful not to copy too much
+        
+        # Extract features for all trials for the selected SFTS and block
+        # Shape: (n_top_j, n_trials, n_components)
+        features_subset = feats_tensor[top_j_indices, b_idx, :, :]
+        
+        # Concatenate features: (n_trials, n_top_j * n_components)
+        # Transpose to (n_trials, n_top_j, n_components) -> reshape
+        F_fold = features_subset.transpose(1, 0, 2).reshape(features_subset.shape[1], -1)
+        
         clf = LinearSVC(
             random_state=cfg.train_cfg.random_state,
             dual=cfg.svm_cfg.dual,
@@ -1037,28 +1050,7 @@ def _evaluate_ensemble_step(
         acc_list.append(accuracy_score(y[idx_test], y_pred))
 
     mean_acc = float(np.mean(acc_list)) if acc_list else 0.0
-    
-    # Train final model on ALL data using 'all' CSP features
-    all_feats_list = [feats_map_all[sid]['all'] for sid in top_j_ids]
-    F_all = np.concatenate(all_feats_list, axis=1)
-    
-    clf_final = LinearSVC(
-        random_state=cfg.train_cfg.random_state,
-        dual=cfg.svm_cfg.dual,
-        max_iter=cfg.svm_cfg.max_iter
-    )
-    clf_final.fit(F_all, y)
-    
-    # Store 'all' CSP params for the final model
-    member_csp_params = {sid: csp_params_map_all[sid]['all'] for sid in top_j_ids}
-    
-    member = EnsembleMember(
-        sfts_ids=top_j_ids,
-        svm=clf_final,
-        csp_params=member_csp_params,
-    )
-    
-    return j, mean_acc, member
+    return j, mean_acc
 
 def build_ensemble(
     dataset: Dataset,
@@ -1107,6 +1099,48 @@ def build_ensemble(
         csp_params_map_all[sid] = params_map
         feats_map_all[sid] = feats_map
         
+    # Convert feats_map_all to a structured numpy tensor for efficient memory sharing
+    # Tensor shape: (n_sfts, n_blocks+1, n_trials, n_components)
+    # We need to map block IDs to indices
+    # 'all' will be index 0, then blocks sorted
+    
+    unique_blocks = lobo_blocks(dataset)
+    block_to_idx = {b: i+1 for i, b in enumerate(unique_blocks)}
+    block_to_idx['all'] = 0 # 'all' is index 0
+    
+    # Map SFTS IDs to indices 0..N-1
+    sfts_id_to_idx = {sid: i for i, sid in enumerate(all_sfts_ids)}
+    
+    n_sfts = len(all_sfts_ids)
+    n_blocks_plus_1 = len(unique_blocks) + 1
+    n_trials = len(y)
+    
+    # Determine n_components from first entry
+    first_sid = all_sfts_ids[0]
+    n_components = feats_map_all[first_sid]['all'].shape[1]
+    
+    print(f"Constructing feature tensor ({n_sfts}, {n_blocks_plus_1}, {n_trials}, {n_components})...")
+    
+    # Initialize large tensor (float32 to save memory)
+    feats_tensor = np.zeros((n_sfts, n_blocks_plus_1, n_trials, n_components), dtype=np.float32)
+    
+    for sid in tqdm(all_sfts_ids, desc="Filling Tensor"):
+        s_idx = sfts_id_to_idx[sid]
+        f_map = feats_map_all[sid]
+        
+        # Fill 'all'
+        feats_tensor[s_idx, 0, :, :] = f_map['all']
+        
+        # Fill blocks
+        for b in unique_blocks:
+            if b in f_map:
+                b_idx = block_to_idx[b]
+                feats_tensor[s_idx, b_idx, :, :] = f_map[b]
+            else:
+                # Should not happen if precalc logic is correct, but fallback to 'all'
+                b_idx = block_to_idx[b]
+                feats_tensor[s_idx, b_idx, :, :] = f_map['all']
+
     print(f"Building ensemble (Total SFTS: {max_j}, Step: {D}) in parallel...")
     
     # 2. Parallel Ensemble Search
@@ -1117,22 +1151,46 @@ def build_ensemble(
         top_j_ids = [s.sfts_id for s in scores_sorted[:j]]
         step_args.append((j, top_j_ids))
         
+    # Pass tensor instead of dict
     results = Parallel(n_jobs=n_jobs)(
-        delayed(_evaluate_ensemble_step)(
-            j, top_j_ids, feats_map_all, csp_params_map_all, dataset, y, blocks
+        delayed(_evaluate_ensemble_step_lite)(
+            j, top_j_ids, feats_tensor, block_to_idx, sfts_id_to_idx, y, blocks, dataset.blocks
         ) for j, top_j_ids in tqdm(step_args, desc="Building Ensemble")
     )
     
-    members_with_acc = []
-    for j, acc, member in results:
-        members_with_acc.append((acc, member))
-        
     # Sort by accuracy descending
-    members_with_acc.sort(key=lambda x: x[0], reverse=True)
+    results.sort(key=lambda x: x[1], reverse=True)
     
-    top_members = [m for acc, m in members_with_acc[:K]]
+    # Select top K
+    top_k_results = results[:K]
     
-    print(f"Top {K} ensemble members selected. Best Acc: {members_with_acc[0][0]:.4f}")
+    print(f"Top {K} ensemble members selected. Best Acc: {top_k_results[0][1]:.4f}")
+    print("Re-building full models for top candidates...")
+    
+    top_members = []
+    for j, acc in top_k_results:
+        # Re-build the member locally
+        top_j_ids = [s.sfts_id for s in scores_sorted[:j]]
+        
+        # Train final model on ALL data using 'all' CSP features
+        all_feats_list = [feats_map_all[sid]['all'] for sid in top_j_ids]
+        F_all = np.concatenate(all_feats_list, axis=1)
+        
+        clf_final = LinearSVC(
+            random_state=cfg.train_cfg.random_state,
+            dual=cfg.svm_cfg.dual,
+            max_iter=cfg.svm_cfg.max_iter
+        )
+        clf_final.fit(F_all, y)
+        
+        member_csp_params = {sid: csp_params_map_all[sid]['all'] for sid in top_j_ids}
+        
+        member = EnsembleMember(
+            sfts_ids=top_j_ids,
+            svm=clf_final,
+            csp_params=member_csp_params,
+        )
+        top_members.append(member)
     
     return top_members
 
@@ -2694,6 +2752,47 @@ def test_gpu_consistency():
 if __name__ == "__main__":
     test_data_leakage()
     test_gpu_consistency()
+
+```
+
+## verify_time_window.py
+
+```python
+from data_loader import load_subject_data
+from config import cfg
+from segmentation import generate_time_windows
+
+def verify():
+    print(f"Config trial_len_sec: {cfg.trial_len_sec}")
+    
+    # Load data for subject 1
+    ds, meta = load_subject_data(1, file_suffix='T')
+    
+    print(f"Dataset X shape: {ds.X.shape}")
+    print(f"Dataset fs: {ds.fs}")
+    
+    expected_samples = int(cfg.trial_len_sec * cfg.fs)
+    print(f"Expected samples: {expected_samples}")
+    
+    if ds.X.shape[-1] == expected_samples:
+        print("SUCCESS: Dataset X shape matches expected trial length.")
+    else:
+        print(f"FAILURE: Dataset X shape {ds.X.shape[-1]} does not match expected {expected_samples}.")
+
+    # Check segmentation
+    tws = generate_time_windows()
+    print(f"Generated {len(tws)} time windows.")
+    
+    max_end_idx = max(t.end_idx for t in tws)
+    print(f"Max time window end index: {max_end_idx}")
+    
+    if max_end_idx <= expected_samples:
+        print("SUCCESS: Time windows fit within trial length.")
+    else:
+        print(f"FAILURE: Max time window end index {max_end_idx} exceeds trial length {expected_samples}.")
+
+if __name__ == "__main__":
+    verify()
 
 ```
 

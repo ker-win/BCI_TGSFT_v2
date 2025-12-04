@@ -1,0 +1,18 @@
+2025-12-03 21:41:42,554 - INFO - Logging started. Saving to logs\train_20251203_214142.log
+2025-12-03 21:41:42,554 - INFO - Execution started at: 2025-12-03 21:41:42.554968
+2025-12-03 21:41:42,556 - INFO - Training ALL subjects (1-9)...
+2025-12-03 21:41:42,556 - INFO - ==========================================
+2025-12-03 21:41:42,556 - INFO - Starting training for Subject 1
+2025-12-03 21:41:42,556 - INFO - ==========================================
+2025-12-03 21:41:42,557 - INFO - Loading data for Subject 1...
+2025-12-03 21:41:42,924 - INFO - Mode: Train on T file, Test on E file.
+2025-12-03 21:41:43,321 - WARNING - E file for subject 1 is empty (no known labels). Falling back to splitting T file.
+2025-12-03 21:41:43,322 - INFO - Mode: Within-subject split on T file (Test Ratio: 0.2)
+2025-12-03 21:41:43,322 - INFO - Split sizes: Train=231, Test=57
+2025-12-03 21:41:43,332 - INFO - Train Data: X=(231, 22, 750), y=(231,)
+2025-12-03 21:41:43,332 - INFO - Test Data: X=(57, 22, 750), y=(57,)
+2025-12-03 21:41:43,332 - INFO - Filtering classes to [0, 1]...
+2025-12-03 21:41:43,341 - INFO - Filtered Train Data: X=(121, 22, 750), y=(121,)
+2025-12-03 21:41:43,341 - INFO - Filtered Test Data: X=(23, 22, 750), y=(23,)
+2025-12-03 21:41:43,341 - INFO - Initializing model...
+2025-12-03 21:41:43,341 - INFO - Fitting model (this may take a while)...

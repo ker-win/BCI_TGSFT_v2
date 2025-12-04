@@ -1,0 +1,230 @@
+2025-12-03 22:05:03,231 - INFO - Logging started. Saving to logs\train_20251203_220503.log
+2025-12-03 22:05:03,231 - INFO - Execution started at: 2025-12-03 22:05:03.231290
+2025-12-03 22:05:03,231 - INFO - Training ALL subjects (1-9)...
+2025-12-03 22:05:03,231 - INFO - ==========================================
+2025-12-03 22:05:03,232 - INFO - Starting training for Subject 1
+2025-12-03 22:05:03,232 - INFO - ==========================================
+2025-12-03 22:05:03,232 - INFO - Loading data for Subject 1...
+2025-12-03 22:05:03,596 - INFO - Mode: Train on T file, Test on E file.
+2025-12-03 22:05:03,958 - WARNING - E file for subject 1 is empty (no known labels). Falling back to splitting T file.
+2025-12-03 22:05:03,958 - INFO - Mode: Within-subject split on T file (Test Ratio: 0.2)
+2025-12-03 22:05:03,958 - INFO - Split sizes: Train=231, Test=57
+2025-12-03 22:05:03,966 - INFO - Train Data: X=(231, 22, 750), y=(231,)
+2025-12-03 22:05:03,967 - INFO - Test Data: X=(57, 22, 750), y=(57,)
+2025-12-03 22:05:03,967 - INFO - Filtering classes to [0, 1]...
+2025-12-03 22:05:03,974 - INFO - Filtered Train Data: X=(121, 22, 750), y=(121,)
+2025-12-03 22:05:03,975 - INFO - Filtered Test Data: X=(23, 22, 750), y=(23,)
+2025-12-03 22:05:03,975 - INFO - Initializing model...
+2025-12-03 22:05:03,975 - INFO - Fitting model (this may take a while)...
+2025-12-04 00:24:47,223 - ERROR - Failed to train subject 1: A task has failed to un-serialize. Please ensure that the arguments of the function are all picklable.
+joblib.externals.loky.process_executor._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\externals\loky\process_executor.py", line 453, in _process_worker
+    call_item = call_queue.get(block=True, timeout=timeout)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\multiprocessing\queues.py", line 117, in get
+    res = self._recv_bytes()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\multiprocessing\connection.py", line 216, in recv_bytes
+    buf = self._recv_bytes(maxlength)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\multiprocessing\connection.py", line 318, in _recv_bytes
+    return self._get_more_data(ov, maxsize)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\multiprocessing\connection.py", line 340, in _get_more_data
+    ov, err = _winapi.ReadFile(self._handle, left, overlapped=True)
+MemoryError
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_train.py", line 159, in main
+    run_experiment_for_subject(sub, args.output_dir)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_train.py", line 103, in run_experiment_for_subject
+    model.fit(ds_train)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\model.py", line 70, in fit
+    top_members = build_ensemble(
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\feature_selection.py", line 332, in build_ensemble
+    results = Parallel(n_jobs=n_jobs)(
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 2072, in __call__
+    return output if self.return_generator else list(output)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 1682, in _get_outputs
+    yield from self._retrieve()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 1784, in _retrieve
+    self._raise_error_fast()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 1859, in _raise_error_fast
+    error_job.get_result(self.timeout)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 758, in get_result
+    return self._return_or_raise()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 773, in _return_or_raise
+    raise self._result
+joblib.externals.loky.process_executor.BrokenProcessPool: A task has failed to un-serialize. Please ensure that the arguments of the function are all picklable.
+2025-12-04 00:24:47,236 - INFO - ==========================================
+2025-12-04 00:24:47,236 - INFO - Starting training for Subject 2
+2025-12-04 00:24:47,236 - INFO - ==========================================
+2025-12-04 00:24:47,236 - INFO - Loading data for Subject 2...
+2025-12-04 00:24:47,812 - INFO - Mode: Within-subject split on T file (Test Ratio: 0.2)
+2025-12-04 00:24:47,815 - INFO - Split sizes: Train=231, Test=57
+2025-12-04 00:24:47,824 - INFO - Train Data: X=(231, 22, 750), y=(231,)
+2025-12-04 00:24:47,824 - INFO - Test Data: X=(57, 22, 750), y=(57,)
+2025-12-04 00:24:47,824 - INFO - Filtering classes to [0, 1]...
+2025-12-04 00:24:47,834 - INFO - Filtered Train Data: X=(113, 22, 750), y=(113,)
+2025-12-04 00:24:47,834 - INFO - Filtered Test Data: X=(31, 22, 750), y=(31,)
+2025-12-04 00:24:47,834 - INFO - Initializing model...
+2025-12-04 00:24:47,835 - INFO - Fitting model (this may take a while)...
+2025-12-04 02:43:56,613 - ERROR - Failed to train subject 2: A task has failed to un-serialize. Please ensure that the arguments of the function are all picklable.
+joblib.externals.loky.process_executor._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\externals\loky\process_executor.py", line 453, in _process_worker
+    call_item = call_queue.get(block=True, timeout=timeout)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\multiprocessing\queues.py", line 117, in get
+    res = self._recv_bytes()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\multiprocessing\connection.py", line 216, in recv_bytes
+    buf = self._recv_bytes(maxlength)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\multiprocessing\connection.py", line 318, in _recv_bytes
+    return self._get_more_data(ov, maxsize)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\multiprocessing\connection.py", line 340, in _get_more_data
+    ov, err = _winapi.ReadFile(self._handle, left, overlapped=True)
+MemoryError
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_train.py", line 159, in main
+    run_experiment_for_subject(sub, args.output_dir)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_train.py", line 103, in run_experiment_for_subject
+    model.fit(ds_train)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\model.py", line 70, in fit
+    top_members = build_ensemble(
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\feature_selection.py", line 332, in build_ensemble
+    results = Parallel(n_jobs=n_jobs)(
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 2072, in __call__
+    return output if self.return_generator else list(output)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 1682, in _get_outputs
+    yield from self._retrieve()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 1784, in _retrieve
+    self._raise_error_fast()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 1859, in _raise_error_fast
+    error_job.get_result(self.timeout)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 758, in get_result
+    return self._return_or_raise()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 773, in _return_or_raise
+    raise self._result
+joblib.externals.loky.process_executor.BrokenProcessPool: A task has failed to un-serialize. Please ensure that the arguments of the function are all picklable.
+2025-12-04 02:43:56,622 - INFO - ==========================================
+2025-12-04 02:43:56,622 - INFO - Starting training for Subject 3
+2025-12-04 02:43:56,622 - INFO - ==========================================
+2025-12-04 02:43:56,623 - INFO - Loading data for Subject 3...
+2025-12-04 02:43:57,152 - INFO - Mode: Within-subject split on T file (Test Ratio: 0.2)
+2025-12-04 02:43:57,155 - INFO - Split sizes: Train=231, Test=57
+2025-12-04 02:43:57,163 - INFO - Train Data: X=(231, 22, 750), y=(231,)
+2025-12-04 02:43:57,163 - INFO - Test Data: X=(57, 22, 750), y=(57,)
+2025-12-04 02:43:57,165 - INFO - Filtering classes to [0, 1]...
+2025-12-04 02:43:57,174 - INFO - Filtered Train Data: X=(113, 22, 750), y=(113,)
+2025-12-04 02:43:57,175 - INFO - Filtered Test Data: X=(31, 22, 750), y=(31,)
+2025-12-04 02:43:57,175 - INFO - Initializing model...
+2025-12-04 02:43:57,176 - INFO - Fitting model (this may take a while)...
+2025-12-04 04:56:59,165 - ERROR - Failed to train subject 3: Could not pickle the task to send it to the workers.
+joblib.externals.loky.process_executor._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\externals\loky\backend\queues.py", line 159, in _feed
+    obj_ = dumps(obj, reducers=reducers)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\externals\loky\backend\reduction.py", line 214, in dumps
+    dump(obj, buf, reducers=reducers, protocol=protocol)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\externals\loky\backend\reduction.py", line 207, in dump
+    _LokyPickler(file, reducers=reducers, protocol=protocol).dump(obj)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\externals\cloudpickle\cloudpickle.py", line 1303, in dump
+    return super().dump(obj)
+MemoryError
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_train.py", line 159, in main
+    run_experiment_for_subject(sub, args.output_dir)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_train.py", line 103, in run_experiment_for_subject
+    model.fit(ds_train)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\model.py", line 70, in fit
+    top_members = build_ensemble(
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\feature_selection.py", line 332, in build_ensemble
+    results = Parallel(n_jobs=n_jobs)(
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 2072, in __call__
+    return output if self.return_generator else list(output)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 1682, in _get_outputs
+    yield from self._retrieve()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 1784, in _retrieve
+    self._raise_error_fast()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 1859, in _raise_error_fast
+    error_job.get_result(self.timeout)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 758, in get_result
+    return self._return_or_raise()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 773, in _return_or_raise
+    raise self._result
+_pickle.PicklingError: Could not pickle the task to send it to the workers.
+2025-12-04 04:56:59,733 - INFO - ==========================================
+2025-12-04 04:56:59,747 - INFO - Starting training for Subject 4
+2025-12-04 04:56:59,796 - INFO - ==========================================
+2025-12-04 04:56:59,811 - INFO - Loading data for Subject 4...
+2025-12-04 04:57:04,096 - INFO - Mode: Within-subject split on T file (Test Ratio: 0.2)
+2025-12-04 04:57:04,099 - INFO - Split sizes: Train=231, Test=57
+2025-12-04 04:57:04,109 - INFO - Train Data: X=(231, 22, 750), y=(231,)
+2025-12-04 04:57:04,109 - INFO - Test Data: X=(57, 22, 750), y=(57,)
+2025-12-04 04:57:04,109 - INFO - Filtering classes to [0, 1]...
+2025-12-04 04:57:04,120 - INFO - Filtered Train Data: X=(113, 22, 750), y=(113,)
+2025-12-04 04:57:04,120 - INFO - Filtered Test Data: X=(31, 22, 750), y=(31,)
+2025-12-04 04:57:04,120 - INFO - Initializing model...
+2025-12-04 04:57:04,121 - INFO - Fitting model (this may take a while)...
+2025-12-04 07:13:12,747 - ERROR - Failed to train subject 4: Could not pickle the task to send it to the workers.
+joblib.externals.loky.process_executor._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\externals\loky\backend\queues.py", line 159, in _feed
+    obj_ = dumps(obj, reducers=reducers)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\externals\loky\backend\reduction.py", line 214, in dumps
+    dump(obj, buf, reducers=reducers, protocol=protocol)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\externals\loky\backend\reduction.py", line 207, in dump
+    _LokyPickler(file, reducers=reducers, protocol=protocol).dump(obj)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\externals\cloudpickle\cloudpickle.py", line 1303, in dump
+    return super().dump(obj)
+MemoryError
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_train.py", line 159, in main
+    run_experiment_for_subject(sub, args.output_dir)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_train.py", line 103, in run_experiment_for_subject
+    model.fit(ds_train)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\model.py", line 70, in fit
+    top_members = build_ensemble(
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\feature_selection.py", line 332, in build_ensemble
+    results = Parallel(n_jobs=n_jobs)(
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 2072, in __call__
+    return output if self.return_generator else list(output)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 1682, in _get_outputs
+    yield from self._retrieve()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 1784, in _retrieve
+    self._raise_error_fast()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 1859, in _raise_error_fast
+    error_job.get_result(self.timeout)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 758, in get_result
+    return self._return_or_raise()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 773, in _return_or_raise
+    raise self._result
+_pickle.PicklingError: Could not pickle the task to send it to the workers.
+2025-12-04 07:13:13,350 - INFO - ==========================================
+2025-12-04 07:13:13,396 - INFO - Starting training for Subject 5
+2025-12-04 07:13:13,426 - INFO - ==========================================
+2025-12-04 07:13:13,457 - INFO - Loading data for Subject 5...
+2025-12-04 07:13:17,644 - INFO - Mode: Within-subject split on T file (Test Ratio: 0.2)
+2025-12-04 07:13:17,651 - INFO - Split sizes: Train=231, Test=57
+2025-12-04 07:13:17,661 - INFO - Train Data: X=(231, 22, 750), y=(231,)
+2025-12-04 07:13:17,661 - INFO - Test Data: X=(57, 22, 750), y=(57,)
+2025-12-04 07:13:17,662 - INFO - Filtering classes to [0, 1]...
+2025-12-04 07:13:17,673 - INFO - Filtered Train Data: X=(113, 22, 750), y=(113,)
+2025-12-04 07:13:17,674 - INFO - Filtered Test Data: X=(31, 22, 750), y=(31,)
+2025-12-04 07:13:17,674 - INFO - Initializing model...
+2025-12-04 07:13:17,674 - INFO - Fitting model (this may take a while)...
