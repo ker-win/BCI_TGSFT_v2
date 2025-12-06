@@ -4,6 +4,7 @@ from dataclasses import dataclass
 from typing import List, Dict, Tuple
 import numpy as np
 from sklearn.svm import LinearSVC
+from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score
 from joblib import Parallel, delayed
 from tqdm import tqdm
@@ -24,6 +25,7 @@ class EnsembleMember:
     sfts_ids: List[int]                    # SFTS indices used
     svm: LinearSVC                         # Trained SVM model
     csp_params: Dict[int, DivCSPParams]    # sfts_id -> DivCSPParams
+    scaler: StandardScaler                 # Fitted StandardScaler for features
 
 def lobo_blocks(dataset: Dataset) -> List[int]:
     """
@@ -72,8 +74,6 @@ def evaluate_single_sfts_lobo(
             continue
 
         # Fit CSP on training data
-        # Fit CSP on training data
-        # Fit CSP on training data
         # Use DivCSPTorch if GPU enabled
         if use_gpu:
             from divcsp_torch import DivCSPTorch
@@ -88,6 +88,11 @@ def evaluate_single_sfts_lobo(
         # Transform
         f_train = divcsp.transform(X_sfts_all[trial_train])
         f_test = divcsp.transform(X_sfts_all[trial_test])
+        
+        # Per-fold StandardScaler to avoid data leakage
+        scaler = StandardScaler()
+        f_train = scaler.fit_transform(f_train)
+        f_test = scaler.transform(f_test)
 
         # Train SVM
         clf = LinearSVC(
@@ -238,14 +243,19 @@ def _evaluate_ensemble_step(
                 fold_feats_list.append(feats_map_all[sid]['all'])
                 
         F_fold = np.concatenate(fold_feats_list, axis=1)
+        
+        # Per-fold StandardScaler to avoid data leakage
+        scaler = StandardScaler()
+        F_train = scaler.fit_transform(F_fold[idx_train])
+        F_test = scaler.transform(F_fold[idx_test])
 
         clf = LinearSVC(
             random_state=cfg.train_cfg.random_state,
             dual=cfg.svm_cfg.dual,
             max_iter=cfg.svm_cfg.max_iter
         )
-        clf.fit(F_fold[idx_train], y[idx_train])
-        y_pred = clf.predict(F_fold[idx_test])
+        clf.fit(F_train, y[idx_train])
+        y_pred = clf.predict(F_test)
         acc_list.append(accuracy_score(y[idx_test], y_pred))
 
     mean_acc = float(np.mean(acc_list)) if acc_list else 0.0
@@ -254,12 +264,16 @@ def _evaluate_ensemble_step(
     all_feats_list = [feats_map_all[sid]['all'] for sid in top_j_ids]
     F_all = np.concatenate(all_feats_list, axis=1)
     
+    # Fit scaler on all training data (acceptable for final model)
+    scaler_final = StandardScaler()
+    F_all_scaled = scaler_final.fit_transform(F_all)
+    
     clf_final = LinearSVC(
         random_state=cfg.train_cfg.random_state,
         dual=cfg.svm_cfg.dual,
         max_iter=cfg.svm_cfg.max_iter
     )
-    clf_final.fit(F_all, y)
+    clf_final.fit(F_all_scaled, y)
     
     # Store 'all' CSP params for the final model
     member_csp_params = {sid: csp_params_map_all[sid]['all'] for sid in top_j_ids}
@@ -268,6 +282,7 @@ def _evaluate_ensemble_step(
         sfts_ids=top_j_ids,
         svm=clf_final,
         csp_params=member_csp_params,
+        scaler=scaler_final,
     )
     
     return j, mean_acc, member

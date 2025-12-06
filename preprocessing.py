@@ -109,9 +109,9 @@ def preprocess_pipeline(dataset: Dataset) -> Dataset:
     ds = resample_to_fs(dataset, cfg.fs)
     
     # Crop to the main analysis window
-    # We'll start at 0.5s post-cue to avoid cue-related VEPs
-    t_start = 0.0
-    t_end = t_start + cfg.trial_len_sec
+    # Using 0.5-2.5s post-cue to capture MI activity and avoid VEPs
+    t_start = 0.5
+    t_end = 2.5
     
     ds = crop_trials(ds, t_start=t_start, t_end=t_end)
     

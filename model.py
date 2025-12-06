@@ -42,11 +42,10 @@ class FGSFTMIModel:
         """
         print("Starting training pipeline...")
         
-        # 1. Preprocess
+        # 1. Preprocess (without scaling to avoid data leakage in LOBO CV)
         print("Preprocessing data...")
-        # ds_proc = preprocess_pipeline(dataset)
-        self.preprocessor = Preprocessor(fs_target=cfg.fs)
-        self.preprocessor.fit(dataset.X, dataset.fs)
+        # Note: Scaling is done inside LOBO CV folds to prevent data leakage
+        self.preprocessor = Preprocessor(fs_target=cfg.fs, do_scaling=False)
         ds_proc = self.preprocessor.transform(dataset)
 
         
@@ -136,13 +135,16 @@ class FGSFTMIModel:
             
             F_concat = np.concatenate(feats_list, axis=1)
             
+            # Apply stored scaler from training
+            F_scaled = member.scaler.transform(F_concat)
+            
             # Predict proba
             # LinearSVC doesn't support predict_proba by default unless calibrated, 
             # but we can use decision_function and softmax or CalibratedClassifierCV.
             # However, for simplicity and since we used LinearSVC directly:
             # We can use decision_function and sigmoid.
             
-            d = member.svm.decision_function(F_concat) # (n_trials,)
+            d = member.svm.decision_function(F_scaled) # (n_trials,)
             # Sigmoid for binary
             prob_1 = 1 / (1 + np.exp(-d))
             prob_0 = 1 - prob_1
