@@ -79,6 +79,40 @@ def test_gpu_consistency():
     
     print("GPU Consistency Test Passed (Basic Runtime Check).")
 
+def test_time_window_shape():
+    print("Testing Time Window Shape...")
+    from config import cfg
+    from preprocessing import preprocess_pipeline
+    from data_loader import Dataset
+    
+    # Create dummy dataset
+    fs = 250.0
+    n_trials = 5
+    n_channels = 22
+    # Create data long enough for 0-4s extraction (1000 samples)
+    # data_loader extracts 4s -> 1000 samples
+    n_samples_raw = int(4.0 * fs) 
+    X = np.random.randn(n_trials, n_channels, n_samples_raw).astype(np.float32)
+    y = np.zeros(n_trials)
+    blocks = np.zeros(n_trials)
+    ch_names = [str(i) for i in range(n_channels)]
+    
+    ds = Dataset(X=X, y=y, blocks=blocks, ch_names=ch_names, fs=fs)
+    
+    # Run pipeline
+    ds_proc = preprocess_pipeline(ds)
+    
+    expected_len_sec = 3.0
+    expected_samples = int(expected_len_sec * fs)
+    
+    print(f"Processed shape: {ds_proc.X.shape}")
+    
+    assert ds_proc.X.shape[-1] == expected_samples, \
+        f"Expected {expected_samples} samples (3.0s), got {ds_proc.X.shape[-1]}"
+        
+    print(f"Time Window Verification Passed! Length is {expected_len_sec}s ({expected_samples} samples).")
+
 if __name__ == "__main__":
     test_data_leakage()
     test_gpu_consistency()
+    test_time_window_shape()

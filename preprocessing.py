@@ -110,7 +110,7 @@ def preprocess_pipeline(dataset: Dataset) -> Dataset:
     
     # Crop to the main analysis window
     # We'll start at 0.5s post-cue to avoid cue-related VEPs
-    t_start = 0.5
+    t_start = 0.0
     t_end = t_start + cfg.trial_len_sec
     
     ds = crop_trials(ds, t_start=t_start, t_end=t_end)

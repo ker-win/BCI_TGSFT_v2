@@ -48,7 +48,7 @@ class ExperimentConfig:
 @dataclass
 class GlobalConfig:
     fs: float = 250.0
-    trial_len_sec: float = 1.5  # Length of the trial to use
+    trial_len_sec: float = 3.0  # Length of the trial to use
     
     # Data paths (can be modified)
     data_path: str = "C:\\Users\\EEG_Dataset\\bcidatasetIV2a-master"

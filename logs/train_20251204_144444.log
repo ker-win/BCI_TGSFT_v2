@@ -1,0 +1,74 @@
+2025-12-04 14:44:44,396 - INFO - Logging started. Saving to logs\train_20251204_144444.log
+2025-12-04 14:44:44,396 - INFO - Execution started at: 2025-12-04 14:44:44.396528
+2025-12-04 14:44:44,397 - INFO - Training ALL subjects (1-9)...
+2025-12-04 14:44:44,397 - INFO - ==========================================
+2025-12-04 14:44:44,397 - INFO - Starting training for Subject 1
+2025-12-04 14:44:44,397 - INFO - ==========================================
+2025-12-04 14:44:44,398 - INFO - Loading data for Subject 1...
+2025-12-04 14:44:44,825 - INFO - Mode: Train on T file, Test on E file.
+2025-12-04 14:44:45,338 - WARNING - E file for subject 1 is empty (no known labels). Falling back to splitting T file.
+2025-12-04 14:44:45,339 - INFO - Mode: Within-subject split on T file (Test Ratio: 0.2)
+2025-12-04 14:44:45,339 - INFO - Split sizes: Train=231, Test=57
+2025-12-04 14:44:45,352 - INFO - Train Data: X=(231, 22, 1000), y=(231,)
+2025-12-04 14:44:45,353 - INFO - Test Data: X=(57, 22, 1000), y=(57,)
+2025-12-04 14:44:45,353 - INFO - Filtering classes to [0, 1]...
+2025-12-04 14:44:45,364 - INFO - Filtered Train Data: X=(121, 22, 1000), y=(121,)
+2025-12-04 14:44:45,364 - INFO - Filtered Test Data: X=(23, 22, 1000), y=(23,)
+2025-12-04 14:44:45,364 - INFO - Initializing model...
+2025-12-04 14:44:45,364 - INFO - Fitting model (this may take a while)...
+2025-12-04 14:44:45,364 - INFO - GPU Acceleration Enabled.
+2025-12-04 16:32:53,349 - ERROR - Failed to train subject 1: A task has failed to un-serialize. Please ensure that the arguments of the function are all picklable.
+joblib.externals.loky.process_executor._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\externals\loky\process_executor.py", line 453, in _process_worker
+    call_item = call_queue.get(block=True, timeout=timeout)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\multiprocessing\queues.py", line 117, in get
+    res = self._recv_bytes()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\multiprocessing\connection.py", line 216, in recv_bytes
+    buf = self._recv_bytes(maxlength)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\multiprocessing\connection.py", line 318, in _recv_bytes
+    return self._get_more_data(ov, maxsize)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\multiprocessing\connection.py", line 340, in _get_more_data
+    ov, err = _winapi.ReadFile(self._handle, left, overlapped=True)
+MemoryError
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_train.py", line 159, in main
+    run_experiment_for_subject(sub, args.output_dir)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_train.py", line 103, in run_experiment_for_subject
+    model.fit(ds_train)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\model.py", line 70, in fit
+    top_members = build_ensemble(
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\feature_selection.py", line 332, in build_ensemble
+    results = Parallel(n_jobs=n_jobs)(
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 2072, in __call__
+    return output if self.return_generator else list(output)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 1682, in _get_outputs
+    yield from self._retrieve()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 1784, in _retrieve
+    self._raise_error_fast()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 1859, in _raise_error_fast
+    error_job.get_result(self.timeout)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 758, in get_result
+    return self._return_or_raise()
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\joblib\parallel.py", line 773, in _return_or_raise
+    raise self._result
+joblib.externals.loky.process_executor.BrokenProcessPool: A task has failed to un-serialize. Please ensure that the arguments of the function are all picklable.
+2025-12-04 16:32:53,380 - INFO - ==========================================
+2025-12-04 16:32:53,380 - INFO - Starting training for Subject 2
+2025-12-04 16:32:53,380 - INFO - ==========================================
+2025-12-04 16:32:53,380 - INFO - Loading data for Subject 2...
+2025-12-04 16:32:53,925 - INFO - Mode: Within-subject split on T file (Test Ratio: 0.2)
+2025-12-04 16:32:53,928 - INFO - Split sizes: Train=231, Test=57
+2025-12-04 16:32:53,939 - INFO - Train Data: X=(231, 22, 1000), y=(231,)
+2025-12-04 16:32:53,940 - INFO - Test Data: X=(57, 22, 1000), y=(57,)
+2025-12-04 16:32:53,940 - INFO - Filtering classes to [0, 1]...
+2025-12-04 16:32:53,952 - INFO - Filtered Train Data: X=(113, 22, 1000), y=(113,)
+2025-12-04 16:32:53,953 - INFO - Filtered Test Data: X=(31, 22, 1000), y=(31,)
+2025-12-04 16:32:53,953 - INFO - Initializing model...
+2025-12-04 16:32:53,954 - INFO - Fitting model (this may take a while)...
+2025-12-04 16:32:53,954 - INFO - GPU Acceleration Enabled.

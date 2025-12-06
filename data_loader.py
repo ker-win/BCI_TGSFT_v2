@@ -211,3 +211,36 @@ def filter_dataset(dataset: Dataset, labels: List[int]) -> Dataset:
         ch_names=dataset.ch_names,
         fs=dataset.fs,
     )
+
+
+def split_train_test_by_blocks(dataset: Dataset, test_block_id: int) -> Tuple[Dataset, Dataset]:
+    """
+    Splits the dataset into train and test sets based on the block ID.
+    
+    Args:
+        dataset: The full dataset.
+        test_block_id: The block ID to use for testing.
+        
+    Returns:
+        Tuple of (train_dataset, test_dataset)
+    """
+    test_mask = dataset.blocks == test_block_id
+    train_mask = ~test_mask
+    
+    ds_train = Dataset(
+        X=dataset.X[train_mask],
+        y=dataset.y[train_mask],
+        blocks=dataset.blocks[train_mask],
+        ch_names=dataset.ch_names,
+        fs=dataset.fs
+    )
+    
+    ds_test = Dataset(
+        X=dataset.X[test_mask],
+        y=dataset.y[test_mask],
+        blocks=dataset.blocks[test_mask],
+        ch_names=dataset.ch_names,
+        fs=dataset.fs
+    )
+    
+    return ds_train, ds_test
