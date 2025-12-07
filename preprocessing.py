@@ -118,9 +118,12 @@ def preprocess_pipeline(dataset: Dataset) -> Dataset:
     return ds
 
 class Preprocessor:
-    def __init__(self, fs_target: float = 250.0, do_scaling: bool = True):
+    def __init__(self, fs_target: float = 250.0, do_scaling: bool = True,
+                 t_start: float = 0.5, t_end: float = 2.5):
         self.fs_target = fs_target
         self.do_scaling = do_scaling
+        self.t_start = t_start  # Time window start (seconds post-cue)
+        self.t_end = t_end      # Time window end (seconds post-cue)
         self.scaler = None
 
     def fit(self, X_train: np.ndarray, fs: float):
@@ -151,15 +154,15 @@ class Preprocessor:
 
     def transform(self, dataset: Dataset) -> Dataset:
         """
-        Applies resampling and scaling to the dataset.
+        Applies resampling, cropping, and optional scaling to the dataset.
         """
         # 1. Resample
         ds_resampled = resample_to_fs(dataset, self.fs_target)
         
-        # 2. Crop (Optional, if we want to enforce it here, but maybe better separate)
-        # For now, let's stick to what the user asked: Resample + Scaling
+        # 2. Crop to the analysis time window (0.5-2.5s post-cue by default)
+        ds_cropped = crop_trials(ds_resampled, t_start=self.t_start, t_end=self.t_end)
         
-        X_out = ds_resampled.X
+        X_out = ds_cropped.X
         
         if self.do_scaling and self.scaler is not None:
             N, C, T = X_out.shape
@@ -171,9 +174,9 @@ class Preprocessor:
             
         return Dataset(
             X=X_out.astype(np.float32),
-            y=ds_resampled.y,
-            blocks=ds_resampled.blocks,
-            ch_names=ds_resampled.ch_names,
+            y=ds_cropped.y,
+            blocks=ds_cropped.blocks,
+            ch_names=ds_cropped.ch_names,
             fs=self.fs_target
         )
 

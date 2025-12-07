@@ -1,0 +1,217 @@
+2025-12-07 08:56:30,578 - INFO - Logging started. Saving to logs\eval_20251207_085630.log
+2025-12-07 08:56:30,579 - INFO - Evaluating ALL subjects (1-9)...
+2025-12-07 08:56:30,579 - INFO - ==========================================
+2025-12-07 08:56:30,579 - INFO - Starting evaluation for Subject 1
+2025-12-07 08:56:30,579 - INFO - Model Path: models\subject_1_model.pkl
+2025-12-07 08:56:30,579 - INFO - ==========================================
+2025-12-07 08:56:30,580 - INFO - Loading data for Subject 1...
+2025-12-07 08:56:30,983 - INFO - Filtering classes to [0, 1]...
+2025-12-07 08:56:30,995 - INFO - Using Block 8 as test set.
+2025-12-07 08:56:31,002 - INFO - Loading model...
+2025-12-07 08:56:31,018 - INFO - Predicting...
+2025-12-07 08:56:32,694 - INFO - Subject 1 Test Accuracy: 1.0000
+2025-12-07 08:56:32,695 - INFO - 
+Classification Report:
+2025-12-07 08:56:32,702 - INFO - 
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00        12
+           1       1.00      1.00      1.00        12
+
+    accuracy                           1.00        24
+   macro avg       1.00      1.00      1.00        24
+weighted avg       1.00      1.00      1.00        24
+
+2025-12-07 08:56:32,707 - INFO - ==========================================
+2025-12-07 08:56:32,707 - INFO - Starting evaluation for Subject 2
+2025-12-07 08:56:32,707 - INFO - Model Path: models\subject_2_model.pkl
+2025-12-07 08:56:32,707 - INFO - ==========================================
+2025-12-07 08:56:32,708 - INFO - Loading data for Subject 2...
+2025-12-07 08:56:33,132 - INFO - Filtering classes to [0, 1]...
+2025-12-07 08:56:33,142 - INFO - Using Block 8 as test set.
+2025-12-07 08:56:33,150 - INFO - Loading model...
+2025-12-07 08:56:33,165 - INFO - Predicting...
+2025-12-07 08:56:34,226 - INFO - Subject 2 Test Accuracy: 0.9583
+2025-12-07 08:56:34,226 - INFO - 
+Classification Report:
+2025-12-07 08:56:34,232 - INFO - 
+              precision    recall  f1-score   support
+
+           0       1.00      0.92      0.96        12
+           1       0.92      1.00      0.96        12
+
+    accuracy                           0.96        24
+   macro avg       0.96      0.96      0.96        24
+weighted avg       0.96      0.96      0.96        24
+
+2025-12-07 08:56:34,238 - INFO - ==========================================
+2025-12-07 08:56:34,238 - INFO - Starting evaluation for Subject 3
+2025-12-07 08:56:34,238 - INFO - Model Path: models\subject_3_model.pkl
+2025-12-07 08:56:34,238 - INFO - ==========================================
+2025-12-07 08:56:34,243 - INFO - Loading data for Subject 3...
+2025-12-07 08:56:34,628 - INFO - Filtering classes to [0, 1]...
+2025-12-07 08:56:34,638 - INFO - Using Block 8 as test set.
+2025-12-07 08:56:34,645 - INFO - Loading model...
+2025-12-07 08:56:34,658 - INFO - Predicting...
+2025-12-07 08:56:34,968 - INFO - Subject 3 Test Accuracy: 1.0000
+2025-12-07 08:56:34,968 - INFO - 
+Classification Report:
+2025-12-07 08:56:34,975 - INFO - 
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00        12
+           1       1.00      1.00      1.00        12
+
+    accuracy                           1.00        24
+   macro avg       1.00      1.00      1.00        24
+weighted avg       1.00      1.00      1.00        24
+
+2025-12-07 08:56:34,979 - INFO - ==========================================
+2025-12-07 08:56:34,980 - INFO - Starting evaluation for Subject 4
+2025-12-07 08:56:34,980 - INFO - Model Path: models\subject_4_model.pkl
+2025-12-07 08:56:34,980 - INFO - ==========================================
+2025-12-07 08:56:34,981 - INFO - Loading data for Subject 4...
+2025-12-07 08:56:35,332 - INFO - Filtering classes to [0, 1]...
+2025-12-07 08:56:35,342 - INFO - Using Block 6 as test set.
+2025-12-07 08:56:35,350 - INFO - Loading model...
+2025-12-07 08:56:35,365 - INFO - Predicting...
+2025-12-07 08:56:36,587 - INFO - Subject 4 Test Accuracy: 0.9583
+2025-12-07 08:56:36,588 - INFO - 
+Classification Report:
+2025-12-07 08:56:36,593 - INFO - 
+              precision    recall  f1-score   support
+
+           0       0.92      1.00      0.96        12
+           1       1.00      0.92      0.96        12
+
+    accuracy                           0.96        24
+   macro avg       0.96      0.96      0.96        24
+weighted avg       0.96      0.96      0.96        24
+
+2025-12-07 08:56:36,599 - INFO - ==========================================
+2025-12-07 08:56:36,599 - INFO - Starting evaluation for Subject 5
+2025-12-07 08:56:36,599 - INFO - Model Path: models\subject_5_model.pkl
+2025-12-07 08:56:36,600 - INFO - ==========================================
+2025-12-07 08:56:36,600 - INFO - Loading data for Subject 5...
+2025-12-07 08:56:37,010 - INFO - Filtering classes to [0, 1]...
+2025-12-07 08:56:37,021 - INFO - Using Block 8 as test set.
+2025-12-07 08:56:37,028 - INFO - Loading model...
+2025-12-07 08:56:37,101 - INFO - Predicting...
+2025-12-07 08:56:40,536 - INFO - Subject 5 Test Accuracy: 0.9583
+2025-12-07 08:56:40,536 - INFO - 
+Classification Report:
+2025-12-07 08:56:40,542 - INFO - 
+              precision    recall  f1-score   support
+
+           0       1.00      0.92      0.96        12
+           1       0.92      1.00      0.96        12
+
+    accuracy                           0.96        24
+   macro avg       0.96      0.96      0.96        24
+weighted avg       0.96      0.96      0.96        24
+
+2025-12-07 08:56:40,547 - INFO - ==========================================
+2025-12-07 08:56:40,547 - INFO - Starting evaluation for Subject 6
+2025-12-07 08:56:40,547 - INFO - Model Path: models\subject_6_model.pkl
+2025-12-07 08:56:40,547 - INFO - ==========================================
+2025-12-07 08:56:40,548 - INFO - Loading data for Subject 6...
+2025-12-07 08:56:40,941 - INFO - Filtering classes to [0, 1]...
+2025-12-07 08:56:40,951 - INFO - Using Block 8 as test set.
+2025-12-07 08:56:40,957 - INFO - Loading model...
+2025-12-07 08:56:40,986 - INFO - Predicting...
+2025-12-07 08:56:49,518 - INFO - Subject 6 Test Accuracy: 0.9167
+2025-12-07 08:56:49,519 - INFO - 
+Classification Report:
+2025-12-07 08:56:49,525 - INFO - 
+              precision    recall  f1-score   support
+
+           0       0.92      0.92      0.92        12
+           1       0.92      0.92      0.92        12
+
+    accuracy                           0.92        24
+   macro avg       0.92      0.92      0.92        24
+weighted avg       0.92      0.92      0.92        24
+
+2025-12-07 08:56:49,531 - INFO - ==========================================
+2025-12-07 08:56:49,531 - INFO - Starting evaluation for Subject 7
+2025-12-07 08:56:49,532 - INFO - Model Path: models\subject_7_model.pkl
+2025-12-07 08:56:49,532 - INFO - ==========================================
+2025-12-07 08:56:49,533 - INFO - Loading data for Subject 7...
+2025-12-07 08:56:49,928 - INFO - Filtering classes to [0, 1]...
+2025-12-07 08:56:49,937 - INFO - Using Block 8 as test set.
+2025-12-07 08:56:49,945 - INFO - Loading model...
+2025-12-07 08:56:49,960 - INFO - Predicting...
+2025-12-07 08:56:51,081 - INFO - Subject 7 Test Accuracy: 1.0000
+2025-12-07 08:56:51,082 - INFO - 
+Classification Report:
+2025-12-07 08:56:51,087 - INFO - 
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00        12
+           1       1.00      1.00      1.00        12
+
+    accuracy                           1.00        24
+   macro avg       1.00      1.00      1.00        24
+weighted avg       1.00      1.00      1.00        24
+
+2025-12-07 08:56:51,091 - INFO - ==========================================
+2025-12-07 08:56:51,091 - INFO - Starting evaluation for Subject 8
+2025-12-07 08:56:51,092 - INFO - Model Path: models\subject_8_model.pkl
+2025-12-07 08:56:51,092 - INFO - ==========================================
+2025-12-07 08:56:51,097 - INFO - Loading data for Subject 8...
+2025-12-07 08:56:51,486 - INFO - Filtering classes to [0, 1]...
+2025-12-07 08:56:51,495 - INFO - Using Block 8 as test set.
+2025-12-07 08:56:51,502 - INFO - Loading model...
+2025-12-07 08:56:51,524 - INFO - Predicting...
+2025-12-07 08:56:58,179 - INFO - Subject 8 Test Accuracy: 1.0000
+2025-12-07 08:56:58,179 - INFO - 
+Classification Report:
+2025-12-07 08:56:58,185 - INFO - 
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00        12
+           1       1.00      1.00      1.00        12
+
+    accuracy                           1.00        24
+   macro avg       1.00      1.00      1.00        24
+weighted avg       1.00      1.00      1.00        24
+
+2025-12-07 08:56:58,191 - INFO - ==========================================
+2025-12-07 08:56:58,191 - INFO - Starting evaluation for Subject 9
+2025-12-07 08:56:58,191 - INFO - Model Path: models\subject_9_model.pkl
+2025-12-07 08:56:58,192 - INFO - ==========================================
+2025-12-07 08:56:58,192 - INFO - Loading data for Subject 9...
+2025-12-07 08:56:58,580 - INFO - Filtering classes to [0, 1]...
+2025-12-07 08:56:58,590 - INFO - Using Block 8 as test set.
+2025-12-07 08:56:58,596 - INFO - Loading model...
+2025-12-07 08:56:58,613 - INFO - Predicting...
+2025-12-07 08:57:00,244 - INFO - Subject 9 Test Accuracy: 1.0000
+2025-12-07 08:57:00,244 - INFO - 
+Classification Report:
+2025-12-07 08:57:00,251 - INFO - 
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00        12
+           1       1.00      1.00      1.00        12
+
+    accuracy                           1.00        24
+   macro avg       1.00      1.00      1.00        24
+weighted avg       1.00      1.00      1.00        24
+
+2025-12-07 08:57:00,255 - INFO - 
+==================================================
+2025-12-07 08:57:00,255 - INFO - EVALUATION SUMMARY
+2025-12-07 08:57:00,256 - INFO - ==================================================
+2025-12-07 08:57:00,256 - INFO -  Subject  Accuracy  Num_Samples
+2025-12-07 08:57:00,256 - INFO -        1  1.000000           24
+2025-12-07 08:57:00,256 - INFO -        2  0.958333           24
+2025-12-07 08:57:00,256 - INFO -        3  1.000000           24
+2025-12-07 08:57:00,257 - INFO -        4  0.958333           24
+2025-12-07 08:57:00,257 - INFO -        5  0.958333           24
+2025-12-07 08:57:00,257 - INFO -        6  0.916667           24
+2025-12-07 08:57:00,257 - INFO -        7  1.000000           24
+2025-12-07 08:57:00,257 - INFO -        8  1.000000           24
+2025-12-07 08:57:00,258 - INFO -        9  1.000000           24
+2025-12-07 08:57:00,258 - INFO - -----------------------------------
+2025-12-07 08:57:00,258 - INFO -     Mean  0.976852
+2025-12-07 08:57:00,259 - INFO - ==================================================
