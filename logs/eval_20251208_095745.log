@@ -1,0 +1,254 @@
+2025-12-08 09:57:45,438 - INFO - Logging started. Saving to logs\eval_20251208_095745.log
+2025-12-08 09:57:45,438 - INFO - Evaluating ALL subjects (1-9)...
+2025-12-08 09:57:45,438 - INFO - ==========================================
+2025-12-08 09:57:45,438 - INFO - Starting evaluation for Subject 1
+2025-12-08 09:57:45,438 - INFO - Model Path: models\subject_1_model.pkl
+2025-12-08 09:57:45,438 - INFO - ==========================================
+2025-12-08 09:57:45,439 - INFO - Loading data for Subject 1...
+2025-12-08 09:57:45,810 - INFO - Filtering classes to [0, 1]...
+2025-12-08 09:57:45,815 - INFO - Using Evaluation dataset (E file) as test set.
+2025-12-08 09:57:45,815 - INFO - Loading model...
+2025-12-08 09:57:45,819 - INFO - Predicting...
+2025-12-08 09:57:45,820 - ERROR - Failed to evaluate subject 1: The length of the input vector x must be greater than padlen, which is 33.
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_eval.py", line 111, in main
+    acc, num_samples = evaluate_subject(sub, model_path, args)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_eval.py", line 76, in evaluate_subject
+    y_pred = model.predict(ds_test)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\model.py", line 158, in predict
+    probs = self.predict_proba(dataset)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\model.py", line 100, in predict_proba
+    X_fband = precompute_freq_bands(ds_proc, self.state.freq_bands, use_gpu=use_gpu)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\features.py", line 77, in precompute_freq_bands
+    X_fband[fb.id] = bandpass_filter(X, fs, fb.f_low, fb.f_high)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\preprocessing.py", line 30, in bandpass_filter
+    Xf = filtfilt(b, a, X, axis=-1)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\scipy\signal\_signaltools.py", line 4525, in filtfilt
+    edge, ext = _validate_pad(padtype, padlen, x, axis,
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\scipy\signal\_signaltools.py", line 4574, in _validate_pad
+    raise ValueError("The length of the input vector x must be greater "
+ValueError: The length of the input vector x must be greater than padlen, which is 33.
+2025-12-08 09:57:45,823 - INFO - ==========================================
+2025-12-08 09:57:45,823 - INFO - Starting evaluation for Subject 2
+2025-12-08 09:57:45,823 - INFO - Model Path: models\subject_2_model.pkl
+2025-12-08 09:57:45,823 - INFO - ==========================================
+2025-12-08 09:57:45,824 - INFO - Loading data for Subject 2...
+2025-12-08 09:57:46,193 - INFO - Filtering classes to [0, 1]...
+2025-12-08 09:57:46,194 - INFO - Using Evaluation dataset (E file) as test set.
+2025-12-08 09:57:46,194 - INFO - Loading model...
+2025-12-08 09:57:46,197 - INFO - Predicting...
+2025-12-08 09:57:46,198 - ERROR - Failed to evaluate subject 2: The length of the input vector x must be greater than padlen, which is 33.
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_eval.py", line 111, in main
+    acc, num_samples = evaluate_subject(sub, model_path, args)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_eval.py", line 76, in evaluate_subject
+    y_pred = model.predict(ds_test)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\model.py", line 158, in predict
+    probs = self.predict_proba(dataset)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\model.py", line 100, in predict_proba
+    X_fband = precompute_freq_bands(ds_proc, self.state.freq_bands, use_gpu=use_gpu)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\features.py", line 77, in precompute_freq_bands
+    X_fband[fb.id] = bandpass_filter(X, fs, fb.f_low, fb.f_high)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\preprocessing.py", line 30, in bandpass_filter
+    Xf = filtfilt(b, a, X, axis=-1)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\scipy\signal\_signaltools.py", line 4525, in filtfilt
+    edge, ext = _validate_pad(padtype, padlen, x, axis,
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\scipy\signal\_signaltools.py", line 4574, in _validate_pad
+    raise ValueError("The length of the input vector x must be greater "
+ValueError: The length of the input vector x must be greater than padlen, which is 33.
+2025-12-08 09:57:46,199 - INFO - ==========================================
+2025-12-08 09:57:46,199 - INFO - Starting evaluation for Subject 3
+2025-12-08 09:57:46,199 - INFO - Model Path: models\subject_3_model.pkl
+2025-12-08 09:57:46,199 - INFO - ==========================================
+2025-12-08 09:57:46,200 - INFO - Loading data for Subject 3...
+2025-12-08 09:57:46,543 - INFO - Filtering classes to [0, 1]...
+2025-12-08 09:57:46,543 - INFO - Using Evaluation dataset (E file) as test set.
+2025-12-08 09:57:46,544 - INFO - Loading model...
+2025-12-08 09:57:46,554 - INFO - Predicting...
+2025-12-08 09:57:46,555 - ERROR - Failed to evaluate subject 3: The length of the input vector x must be greater than padlen, which is 33.
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_eval.py", line 111, in main
+    acc, num_samples = evaluate_subject(sub, model_path, args)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_eval.py", line 76, in evaluate_subject
+    y_pred = model.predict(ds_test)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\model.py", line 158, in predict
+    probs = self.predict_proba(dataset)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\model.py", line 100, in predict_proba
+    X_fband = precompute_freq_bands(ds_proc, self.state.freq_bands, use_gpu=use_gpu)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\features.py", line 77, in precompute_freq_bands
+    X_fband[fb.id] = bandpass_filter(X, fs, fb.f_low, fb.f_high)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\preprocessing.py", line 30, in bandpass_filter
+    Xf = filtfilt(b, a, X, axis=-1)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\scipy\signal\_signaltools.py", line 4525, in filtfilt
+    edge, ext = _validate_pad(padtype, padlen, x, axis,
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\scipy\signal\_signaltools.py", line 4574, in _validate_pad
+    raise ValueError("The length of the input vector x must be greater "
+ValueError: The length of the input vector x must be greater than padlen, which is 33.
+2025-12-08 09:57:46,558 - INFO - ==========================================
+2025-12-08 09:57:46,559 - INFO - Starting evaluation for Subject 4
+2025-12-08 09:57:46,559 - INFO - Model Path: models\subject_4_model.pkl
+2025-12-08 09:57:46,559 - INFO - ==========================================
+2025-12-08 09:57:46,559 - INFO - Loading data for Subject 4...
+2025-12-08 09:57:46,924 - INFO - Filtering classes to [0, 1]...
+2025-12-08 09:57:46,924 - INFO - Using Evaluation dataset (E file) as test set.
+2025-12-08 09:57:46,924 - INFO - Loading model...
+2025-12-08 09:57:46,927 - INFO - Predicting...
+2025-12-08 09:57:46,928 - ERROR - Failed to evaluate subject 4: The length of the input vector x must be greater than padlen, which is 33.
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_eval.py", line 111, in main
+    acc, num_samples = evaluate_subject(sub, model_path, args)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_eval.py", line 76, in evaluate_subject
+    y_pred = model.predict(ds_test)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\model.py", line 158, in predict
+    probs = self.predict_proba(dataset)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\model.py", line 100, in predict_proba
+    X_fband = precompute_freq_bands(ds_proc, self.state.freq_bands, use_gpu=use_gpu)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\features.py", line 77, in precompute_freq_bands
+    X_fband[fb.id] = bandpass_filter(X, fs, fb.f_low, fb.f_high)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\preprocessing.py", line 30, in bandpass_filter
+    Xf = filtfilt(b, a, X, axis=-1)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\scipy\signal\_signaltools.py", line 4525, in filtfilt
+    edge, ext = _validate_pad(padtype, padlen, x, axis,
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\scipy\signal\_signaltools.py", line 4574, in _validate_pad
+    raise ValueError("The length of the input vector x must be greater "
+ValueError: The length of the input vector x must be greater than padlen, which is 33.
+2025-12-08 09:57:46,930 - INFO - ==========================================
+2025-12-08 09:57:46,930 - INFO - Starting evaluation for Subject 5
+2025-12-08 09:57:46,930 - INFO - Model Path: models\subject_5_model.pkl
+2025-12-08 09:57:46,930 - INFO - ==========================================
+2025-12-08 09:57:46,931 - INFO - Loading data for Subject 5...
+2025-12-08 09:57:47,302 - INFO - Filtering classes to [0, 1]...
+2025-12-08 09:57:47,302 - INFO - Using Evaluation dataset (E file) as test set.
+2025-12-08 09:57:47,303 - INFO - Loading model...
+2025-12-08 09:57:47,305 - INFO - Predicting...
+2025-12-08 09:57:47,306 - ERROR - Failed to evaluate subject 5: The length of the input vector x must be greater than padlen, which is 33.
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_eval.py", line 111, in main
+    acc, num_samples = evaluate_subject(sub, model_path, args)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_eval.py", line 76, in evaluate_subject
+    y_pred = model.predict(ds_test)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\model.py", line 158, in predict
+    probs = self.predict_proba(dataset)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\model.py", line 100, in predict_proba
+    X_fband = precompute_freq_bands(ds_proc, self.state.freq_bands, use_gpu=use_gpu)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\features.py", line 77, in precompute_freq_bands
+    X_fband[fb.id] = bandpass_filter(X, fs, fb.f_low, fb.f_high)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\preprocessing.py", line 30, in bandpass_filter
+    Xf = filtfilt(b, a, X, axis=-1)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\scipy\signal\_signaltools.py", line 4525, in filtfilt
+    edge, ext = _validate_pad(padtype, padlen, x, axis,
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\scipy\signal\_signaltools.py", line 4574, in _validate_pad
+    raise ValueError("The length of the input vector x must be greater "
+ValueError: The length of the input vector x must be greater than padlen, which is 33.
+2025-12-08 09:57:47,307 - INFO - ==========================================
+2025-12-08 09:57:47,307 - INFO - Starting evaluation for Subject 6
+2025-12-08 09:57:47,308 - INFO - Model Path: models\subject_6_model.pkl
+2025-12-08 09:57:47,308 - INFO - ==========================================
+2025-12-08 09:57:47,308 - INFO - Loading data for Subject 6...
+2025-12-08 09:57:47,663 - INFO - Filtering classes to [0, 1]...
+2025-12-08 09:57:47,663 - INFO - Using Evaluation dataset (E file) as test set.
+2025-12-08 09:57:47,664 - INFO - Loading model...
+2025-12-08 09:57:47,672 - INFO - Predicting...
+2025-12-08 09:57:47,673 - ERROR - Failed to evaluate subject 6: The length of the input vector x must be greater than padlen, which is 33.
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_eval.py", line 111, in main
+    acc, num_samples = evaluate_subject(sub, model_path, args)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_eval.py", line 76, in evaluate_subject
+    y_pred = model.predict(ds_test)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\model.py", line 158, in predict
+    probs = self.predict_proba(dataset)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\model.py", line 100, in predict_proba
+    X_fband = precompute_freq_bands(ds_proc, self.state.freq_bands, use_gpu=use_gpu)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\features.py", line 77, in precompute_freq_bands
+    X_fband[fb.id] = bandpass_filter(X, fs, fb.f_low, fb.f_high)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\preprocessing.py", line 30, in bandpass_filter
+    Xf = filtfilt(b, a, X, axis=-1)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\scipy\signal\_signaltools.py", line 4525, in filtfilt
+    edge, ext = _validate_pad(padtype, padlen, x, axis,
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\scipy\signal\_signaltools.py", line 4574, in _validate_pad
+    raise ValueError("The length of the input vector x must be greater "
+ValueError: The length of the input vector x must be greater than padlen, which is 33.
+2025-12-08 09:57:47,675 - INFO - ==========================================
+2025-12-08 09:57:47,675 - INFO - Starting evaluation for Subject 7
+2025-12-08 09:57:47,675 - INFO - Model Path: models\subject_7_model.pkl
+2025-12-08 09:57:47,675 - INFO - ==========================================
+2025-12-08 09:57:47,677 - INFO - Loading data for Subject 7...
+2025-12-08 09:57:48,037 - INFO - Filtering classes to [0, 1]...
+2025-12-08 09:57:48,037 - INFO - Using Evaluation dataset (E file) as test set.
+2025-12-08 09:57:48,037 - INFO - Loading model...
+2025-12-08 09:57:48,040 - INFO - Predicting...
+2025-12-08 09:57:48,040 - ERROR - Failed to evaluate subject 7: The length of the input vector x must be greater than padlen, which is 33.
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_eval.py", line 111, in main
+    acc, num_samples = evaluate_subject(sub, model_path, args)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_eval.py", line 76, in evaluate_subject
+    y_pred = model.predict(ds_test)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\model.py", line 158, in predict
+    probs = self.predict_proba(dataset)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\model.py", line 100, in predict_proba
+    X_fband = precompute_freq_bands(ds_proc, self.state.freq_bands, use_gpu=use_gpu)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\features.py", line 77, in precompute_freq_bands
+    X_fband[fb.id] = bandpass_filter(X, fs, fb.f_low, fb.f_high)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\preprocessing.py", line 30, in bandpass_filter
+    Xf = filtfilt(b, a, X, axis=-1)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\scipy\signal\_signaltools.py", line 4525, in filtfilt
+    edge, ext = _validate_pad(padtype, padlen, x, axis,
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\scipy\signal\_signaltools.py", line 4574, in _validate_pad
+    raise ValueError("The length of the input vector x must be greater "
+ValueError: The length of the input vector x must be greater than padlen, which is 33.
+2025-12-08 09:57:48,042 - INFO - ==========================================
+2025-12-08 09:57:48,042 - INFO - Starting evaluation for Subject 8
+2025-12-08 09:57:48,042 - INFO - Model Path: models\subject_8_model.pkl
+2025-12-08 09:57:48,042 - INFO - ==========================================
+2025-12-08 09:57:48,043 - INFO - Loading data for Subject 8...
+2025-12-08 09:57:48,427 - INFO - Filtering classes to [0, 1]...
+2025-12-08 09:57:48,427 - INFO - Using Evaluation dataset (E file) as test set.
+2025-12-08 09:57:48,427 - INFO - Loading model...
+2025-12-08 09:57:48,434 - INFO - Predicting...
+2025-12-08 09:57:48,434 - ERROR - Failed to evaluate subject 8: The length of the input vector x must be greater than padlen, which is 33.
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_eval.py", line 111, in main
+    acc, num_samples = evaluate_subject(sub, model_path, args)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_eval.py", line 76, in evaluate_subject
+    y_pred = model.predict(ds_test)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\model.py", line 158, in predict
+    probs = self.predict_proba(dataset)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\model.py", line 100, in predict_proba
+    X_fband = precompute_freq_bands(ds_proc, self.state.freq_bands, use_gpu=use_gpu)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\features.py", line 77, in precompute_freq_bands
+    X_fband[fb.id] = bandpass_filter(X, fs, fb.f_low, fb.f_high)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\preprocessing.py", line 30, in bandpass_filter
+    Xf = filtfilt(b, a, X, axis=-1)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\scipy\signal\_signaltools.py", line 4525, in filtfilt
+    edge, ext = _validate_pad(padtype, padlen, x, axis,
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\scipy\signal\_signaltools.py", line 4574, in _validate_pad
+    raise ValueError("The length of the input vector x must be greater "
+ValueError: The length of the input vector x must be greater than padlen, which is 33.
+2025-12-08 09:57:48,437 - INFO - ==========================================
+2025-12-08 09:57:48,438 - INFO - Starting evaluation for Subject 9
+2025-12-08 09:57:48,438 - INFO - Model Path: models\subject_9_model.pkl
+2025-12-08 09:57:48,438 - INFO - ==========================================
+2025-12-08 09:57:48,438 - INFO - Loading data for Subject 9...
+2025-12-08 09:57:48,807 - INFO - Filtering classes to [0, 1]...
+2025-12-08 09:57:48,808 - INFO - Using Evaluation dataset (E file) as test set.
+2025-12-08 09:57:48,808 - INFO - Loading model...
+2025-12-08 09:57:48,811 - INFO - Predicting...
+2025-12-08 09:57:48,812 - ERROR - Failed to evaluate subject 9: The length of the input vector x must be greater than padlen, which is 33.
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_eval.py", line 111, in main
+    acc, num_samples = evaluate_subject(sub, model_path, args)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\main_eval.py", line 76, in evaluate_subject
+    y_pred = model.predict(ds_test)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\model.py", line 158, in predict
+    probs = self.predict_proba(dataset)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\model.py", line 100, in predict_proba
+    X_fband = precompute_freq_bands(ds_proc, self.state.freq_bands, use_gpu=use_gpu)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\features.py", line 77, in precompute_freq_bands
+    X_fband[fb.id] = bandpass_filter(X, fs, fb.f_low, fb.f_high)
+  File "C:\Users\user\Desktop\eeg_code\BCI_TGSFT_v2\preprocessing.py", line 30, in bandpass_filter
+    Xf = filtfilt(b, a, X, axis=-1)
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\scipy\signal\_signaltools.py", line 4525, in filtfilt
+    edge, ext = _validate_pad(padtype, padlen, x, axis,
+  File "C:\Users\user\AppData\Local\Programs\Python\Python310\lib\site-packages\scipy\signal\_signaltools.py", line 4574, in _validate_pad
+    raise ValueError("The length of the input vector x must be greater "
+ValueError: The length of the input vector x must be greater than padlen, which is 33.

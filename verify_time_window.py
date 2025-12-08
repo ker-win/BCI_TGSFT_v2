@@ -43,7 +43,7 @@ def main():
     # 4. Verify time window
     print("\n4. Time Window Verification:")
     expected_start = 0.5  # seconds
-    expected_end = 2.5    # seconds
+    expected_end = 1.5    # seconds
     expected_duration = expected_end - expected_start
     expected_samples = int(expected_duration * cfg.fs)
     
