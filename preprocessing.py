@@ -109,9 +109,9 @@ def preprocess_pipeline(dataset: Dataset) -> Dataset:
     ds = resample_to_fs(dataset, cfg.fs)
     
     # Crop to the main analysis window
-    # Using 0.5-2.5s post-cue to capture MI activity and avoid VEPs
-    t_start = 0.5
-    t_end = 2.5
+    # Using 0-3s post-cue to capture full MI activity
+    t_start = 0.0
+    t_end = 3.0
     
     ds = crop_trials(ds, t_start=t_start, t_end=t_end)
     
@@ -119,7 +119,7 @@ def preprocess_pipeline(dataset: Dataset) -> Dataset:
 
 class Preprocessor:
     def __init__(self, fs_target: float = 250.0, do_scaling: bool = True,
-                 t_start: float = 0.5, t_end: float = 2.5):
+                 t_start: float = 0.0, t_end: float = 3.0):
         self.fs_target = fs_target
         self.do_scaling = do_scaling
         self.t_start = t_start  # Time window start (seconds post-cue)
@@ -159,7 +159,7 @@ class Preprocessor:
         # 1. Resample
         ds_resampled = resample_to_fs(dataset, self.fs_target)
         
-        # 2. Crop to the analysis time window (0.5-2.5s post-cue by default)
+        # 2. Crop to the analysis time window (0-3s post-cue by default)
         ds_cropped = crop_trials(ds_resampled, t_start=self.t_start, t_end=self.t_end)
         
         X_out = ds_cropped.X

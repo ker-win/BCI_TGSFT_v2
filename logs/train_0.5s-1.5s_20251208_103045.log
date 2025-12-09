@@ -1,0 +1,232 @@
+2025-12-08 10:30:45,341 - INFO - Logging started. Saving to logs\train_0.5s-1.5s_20251208_103045.log
+2025-12-08 10:30:45,351 - INFO - Time Window: 0.5s-1.5s
+2025-12-08 10:30:45,352 - INFO - Execution started at: 2025-12-08 10:30:45.352455
+2025-12-08 10:30:45,352 - INFO - Using LOBO (Leave-One-Block-Out) Cross-Validation for evaluation
+2025-12-08 10:30:45,352 - INFO - Training ALL subjects (1-9) with LOBO CV...
+2025-12-08 10:30:45,352 - INFO - ==========================================
+2025-12-08 10:30:45,413 - INFO - Starting LOBO Training for Subject 1
+2025-12-08 10:30:45,430 - INFO - ==========================================
+2025-12-08 10:30:45,430 - INFO - Loading data for Subject 1...
+2025-12-08 10:30:46,451 - INFO - Filtering classes to [0, 1]...
+2025-12-08 10:30:46,463 - INFO - Filtered Data: X=(144, 22, 1000), y=(144,)
+2025-12-08 10:30:46,469 - INFO - Available blocks: [3, 4, 5, 6, 7, 8] (Total: 6)
+2025-12-08 10:30:46,495 - INFO -   Fold 3: Train=120, Test=24
+2025-12-08 10:40:08,359 - INFO -     Block 3 Accuracy: 0.7917
+2025-12-08 10:40:08,648 - INFO -   Fold 4: Train=120, Test=24
+2025-12-08 10:49:19,783 - INFO -     Block 4 Accuracy: 0.7917
+2025-12-08 10:49:19,791 - INFO -   Fold 5: Train=120, Test=24
+2025-12-08 10:58:20,748 - INFO -     Block 5 Accuracy: 0.7917
+2025-12-08 10:58:20,756 - INFO -   Fold 6: Train=120, Test=24
+2025-12-08 11:07:20,013 - INFO -     Block 6 Accuracy: 0.8333
+2025-12-08 11:07:20,022 - INFO -   Fold 7: Train=120, Test=24
+2025-12-08 11:16:16,177 - INFO -     Block 7 Accuracy: 0.6250
+2025-12-08 11:16:16,184 - INFO -   Fold 8: Train=120, Test=24
+2025-12-08 11:25:13,997 - INFO -     Block 8 Accuracy: 0.7083
+2025-12-08 11:25:13,997 - INFO - Subject 1 LOBO Mean Accuracy: 0.756944 (Total samples: 144)
+2025-12-08 11:25:13,998 - INFO - Training final model on all data for Subject 1...
+2025-12-08 11:36:01,645 - INFO - Final model saved to models\subject_1_model.pkl
+2025-12-08 11:36:01,645 - INFO - Finished Subject 1
+2025-12-08 11:36:01,668 - INFO - ==========================================
+2025-12-08 11:36:01,669 - INFO - Starting LOBO Training for Subject 2
+2025-12-08 11:36:01,669 - INFO - ==========================================
+2025-12-08 11:36:01,669 - INFO - Loading data for Subject 2...
+2025-12-08 11:36:02,075 - INFO - Filtering classes to [0, 1]...
+2025-12-08 11:36:02,082 - INFO - Filtered Data: X=(144, 22, 1000), y=(144,)
+2025-12-08 11:36:02,082 - INFO - Available blocks: [3, 4, 5, 6, 7, 8] (Total: 6)
+2025-12-08 11:36:02,088 - INFO -   Fold 3: Train=120, Test=24
+2025-12-08 11:45:00,433 - INFO -     Block 3 Accuracy: 0.5000
+2025-12-08 11:45:00,441 - INFO -   Fold 4: Train=120, Test=24
+2025-12-08 11:53:57,590 - INFO -     Block 4 Accuracy: 0.4583
+2025-12-08 11:53:57,597 - INFO -   Fold 5: Train=120, Test=24
+2025-12-08 12:02:53,146 - INFO -     Block 5 Accuracy: 0.5417
+2025-12-08 12:02:53,155 - INFO -   Fold 6: Train=120, Test=24
+2025-12-08 12:11:48,575 - INFO -     Block 6 Accuracy: 0.5417
+2025-12-08 12:11:48,582 - INFO -   Fold 7: Train=120, Test=24
+2025-12-08 12:20:44,593 - INFO -     Block 7 Accuracy: 0.6667
+2025-12-08 12:20:44,600 - INFO -   Fold 8: Train=120, Test=24
+2025-12-08 12:29:42,331 - INFO -     Block 8 Accuracy: 0.5833
+2025-12-08 12:29:42,331 - INFO - Subject 2 LOBO Mean Accuracy: 0.548611 (Total samples: 144)
+2025-12-08 12:29:42,332 - INFO - Training final model on all data for Subject 2...
+2025-12-08 12:40:27,283 - INFO - Final model saved to models\subject_2_model.pkl
+2025-12-08 12:40:27,283 - INFO - Finished Subject 2
+2025-12-08 12:40:27,305 - INFO - ==========================================
+2025-12-08 12:40:27,305 - INFO - Starting LOBO Training for Subject 3
+2025-12-08 12:40:27,305 - INFO - ==========================================
+2025-12-08 12:40:27,306 - INFO - Loading data for Subject 3...
+2025-12-08 12:40:27,707 - INFO - Filtering classes to [0, 1]...
+2025-12-08 12:40:27,713 - INFO - Filtered Data: X=(144, 22, 1000), y=(144,)
+2025-12-08 12:40:27,714 - INFO - Available blocks: [3, 4, 5, 6, 7, 8] (Total: 6)
+2025-12-08 12:40:27,719 - INFO -   Fold 3: Train=120, Test=24
+2025-12-08 12:49:28,166 - INFO -     Block 3 Accuracy: 0.9167
+2025-12-08 12:49:28,174 - INFO -   Fold 4: Train=120, Test=24
+2025-12-08 12:58:26,773 - INFO -     Block 4 Accuracy: 0.8333
+2025-12-08 12:58:26,780 - INFO -   Fold 5: Train=120, Test=24
+2025-12-08 13:07:28,648 - INFO -     Block 5 Accuracy: 0.8333
+2025-12-08 13:07:28,656 - INFO -   Fold 6: Train=120, Test=24
+2025-12-08 13:16:25,177 - INFO -     Block 6 Accuracy: 0.8333
+2025-12-08 13:16:25,184 - INFO -   Fold 7: Train=120, Test=24
+2025-12-08 13:25:25,338 - INFO -     Block 7 Accuracy: 0.9583
+2025-12-08 13:25:25,345 - INFO -   Fold 8: Train=120, Test=24
+2025-12-08 13:34:23,963 - INFO -     Block 8 Accuracy: 0.8333
+2025-12-08 13:34:23,963 - INFO - Subject 3 LOBO Mean Accuracy: 0.868056 (Total samples: 144)
+2025-12-08 13:34:23,965 - INFO - Training final model on all data for Subject 3...
+2025-12-08 13:45:11,410 - INFO - Final model saved to models\subject_3_model.pkl
+2025-12-08 13:45:11,410 - INFO - Finished Subject 3
+2025-12-08 13:45:11,433 - INFO - ==========================================
+2025-12-08 13:45:11,433 - INFO - Starting LOBO Training for Subject 4
+2025-12-08 13:45:11,433 - INFO - ==========================================
+2025-12-08 13:45:11,433 - INFO - Loading data for Subject 4...
+2025-12-08 13:45:11,793 - INFO - Filtering classes to [0, 1]...
+2025-12-08 13:45:11,799 - INFO - Filtered Data: X=(144, 22, 1000), y=(144,)
+2025-12-08 13:45:11,799 - INFO - Available blocks: [1, 2, 3, 4, 5, 6] (Total: 6)
+2025-12-08 13:45:11,805 - INFO -   Fold 1: Train=120, Test=24
+2025-12-08 13:54:10,347 - INFO -     Block 1 Accuracy: 0.6667
+2025-12-08 13:54:10,354 - INFO -   Fold 2: Train=120, Test=24
+2025-12-08 14:03:07,748 - INFO -     Block 2 Accuracy: 0.6250
+2025-12-08 14:03:07,757 - INFO -   Fold 3: Train=120, Test=24
+2025-12-08 14:12:04,517 - INFO -     Block 3 Accuracy: 0.6250
+2025-12-08 14:12:04,524 - INFO -   Fold 4: Train=120, Test=24
+2025-12-08 14:21:01,086 - INFO -     Block 4 Accuracy: 0.4583
+2025-12-08 14:21:01,093 - INFO -   Fold 5: Train=120, Test=24
+2025-12-08 14:29:58,151 - INFO -     Block 5 Accuracy: 0.6667
+2025-12-08 14:29:58,160 - INFO -   Fold 6: Train=120, Test=24
+2025-12-08 14:38:55,543 - INFO -     Block 6 Accuracy: 0.7083
+2025-12-08 14:38:55,543 - INFO - Subject 4 LOBO Mean Accuracy: 0.625000 (Total samples: 144)
+2025-12-08 14:38:55,543 - INFO - Training final model on all data for Subject 4...
+2025-12-08 14:49:40,364 - INFO - Final model saved to models\subject_4_model.pkl
+2025-12-08 14:49:40,365 - INFO - Finished Subject 4
+2025-12-08 14:49:40,390 - INFO - ==========================================
+2025-12-08 14:49:40,390 - INFO - Starting LOBO Training for Subject 5
+2025-12-08 14:49:40,390 - INFO - ==========================================
+2025-12-08 14:49:40,390 - INFO - Loading data for Subject 5...
+2025-12-08 14:49:40,791 - INFO - Filtering classes to [0, 1]...
+2025-12-08 14:49:40,797 - INFO - Filtered Data: X=(144, 22, 1000), y=(144,)
+2025-12-08 14:49:40,798 - INFO - Available blocks: [3, 4, 5, 6, 7, 8] (Total: 6)
+2025-12-08 14:49:40,804 - INFO -   Fold 3: Train=120, Test=24
+2025-12-08 14:58:39,014 - INFO -     Block 3 Accuracy: 0.6667
+2025-12-08 14:58:39,022 - INFO -   Fold 4: Train=120, Test=24
+2025-12-08 15:07:37,244 - INFO -     Block 4 Accuracy: 0.7500
+2025-12-08 15:07:37,252 - INFO -   Fold 5: Train=120, Test=24
+2025-12-08 15:16:34,954 - INFO -     Block 5 Accuracy: 0.8333
+2025-12-08 15:16:34,962 - INFO -   Fold 6: Train=120, Test=24
+2025-12-08 15:25:30,572 - INFO -     Block 6 Accuracy: 0.7500
+2025-12-08 15:25:30,579 - INFO -   Fold 7: Train=120, Test=24
+2025-12-08 15:34:29,263 - INFO -     Block 7 Accuracy: 0.7083
+2025-12-08 15:34:29,270 - INFO -   Fold 8: Train=120, Test=24
+2025-12-08 15:43:28,075 - INFO -     Block 8 Accuracy: 0.7083
+2025-12-08 15:43:28,076 - INFO - Subject 5 LOBO Mean Accuracy: 0.736111 (Total samples: 144)
+2025-12-08 15:43:28,076 - INFO - Training final model on all data for Subject 5...
+2025-12-08 15:54:15,573 - INFO - Final model saved to models\subject_5_model.pkl
+2025-12-08 15:54:15,573 - INFO - Finished Subject 5
+2025-12-08 15:54:15,595 - INFO - ==========================================
+2025-12-08 15:54:15,595 - INFO - Starting LOBO Training for Subject 6
+2025-12-08 15:54:15,595 - INFO - ==========================================
+2025-12-08 15:54:15,595 - INFO - Loading data for Subject 6...
+2025-12-08 15:54:16,007 - INFO - Filtering classes to [0, 1]...
+2025-12-08 15:54:16,013 - INFO - Filtered Data: X=(144, 22, 1000), y=(144,)
+2025-12-08 15:54:16,013 - INFO - Available blocks: [3, 4, 5, 6, 7, 8] (Total: 6)
+2025-12-08 15:54:16,020 - INFO -   Fold 3: Train=120, Test=24
+2025-12-08 16:03:15,528 - INFO -     Block 3 Accuracy: 0.7500
+2025-12-08 16:03:15,536 - INFO -   Fold 4: Train=120, Test=24
+2025-12-08 16:12:12,930 - INFO -     Block 4 Accuracy: 0.8333
+2025-12-08 16:12:12,938 - INFO -   Fold 5: Train=120, Test=24
+2025-12-08 16:21:10,733 - INFO -     Block 5 Accuracy: 0.6250
+2025-12-08 16:21:10,739 - INFO -   Fold 6: Train=120, Test=24
+2025-12-08 16:30:13,666 - INFO -     Block 6 Accuracy: 0.7917
+2025-12-08 16:30:13,673 - INFO -   Fold 7: Train=120, Test=24
+2025-12-08 16:39:09,383 - INFO -     Block 7 Accuracy: 0.8333
+2025-12-08 16:39:09,391 - INFO -   Fold 8: Train=120, Test=24
+2025-12-08 16:48:08,514 - INFO -     Block 8 Accuracy: 0.6667
+2025-12-08 16:48:08,515 - INFO - Subject 6 LOBO Mean Accuracy: 0.750000 (Total samples: 144)
+2025-12-08 16:48:08,515 - INFO - Training final model on all data for Subject 6...
+2025-12-08 16:58:58,382 - INFO - Final model saved to models\subject_6_model.pkl
+2025-12-08 16:58:58,383 - INFO - Finished Subject 6
+2025-12-08 16:58:58,401 - INFO - ==========================================
+2025-12-08 16:58:58,401 - INFO - Starting LOBO Training for Subject 7
+2025-12-08 16:58:58,401 - INFO - ==========================================
+2025-12-08 16:58:58,401 - INFO - Loading data for Subject 7...
+2025-12-08 16:58:58,814 - INFO - Filtering classes to [0, 1]...
+2025-12-08 16:58:58,820 - INFO - Filtered Data: X=(144, 22, 1000), y=(144,)
+2025-12-08 16:58:58,821 - INFO - Available blocks: [3, 4, 5, 6, 7, 8] (Total: 6)
+2025-12-08 16:58:58,826 - INFO -   Fold 3: Train=120, Test=24
+2025-12-08 17:07:56,315 - INFO -     Block 3 Accuracy: 0.7500
+2025-12-08 17:07:56,324 - INFO -   Fold 4: Train=120, Test=24
+2025-12-08 17:16:54,726 - INFO -     Block 4 Accuracy: 0.6667
+2025-12-08 17:16:54,734 - INFO -   Fold 5: Train=120, Test=24
+2025-12-08 17:25:53,117 - INFO -     Block 5 Accuracy: 0.7083
+2025-12-08 17:25:53,124 - INFO -   Fold 6: Train=120, Test=24
+2025-12-08 17:34:50,958 - INFO -     Block 6 Accuracy: 0.7083
+2025-12-08 17:34:50,966 - INFO -   Fold 7: Train=120, Test=24
+2025-12-08 17:43:48,619 - INFO -     Block 7 Accuracy: 0.6250
+2025-12-08 17:43:48,627 - INFO -   Fold 8: Train=120, Test=24
+2025-12-08 17:52:47,937 - INFO -     Block 8 Accuracy: 0.5833
+2025-12-08 17:52:47,938 - INFO - Subject 7 LOBO Mean Accuracy: 0.673611 (Total samples: 144)
+2025-12-08 17:52:47,938 - INFO - Training final model on all data for Subject 7...
+2025-12-08 18:03:30,824 - INFO - Final model saved to models\subject_7_model.pkl
+2025-12-08 18:03:30,825 - INFO - Finished Subject 7
+2025-12-08 18:03:30,844 - INFO - ==========================================
+2025-12-08 18:03:30,844 - INFO - Starting LOBO Training for Subject 8
+2025-12-08 18:03:30,844 - INFO - ==========================================
+2025-12-08 18:03:30,845 - INFO - Loading data for Subject 8...
+2025-12-08 18:03:31,254 - INFO - Filtering classes to [0, 1]...
+2025-12-08 18:03:31,260 - INFO - Filtered Data: X=(144, 22, 1000), y=(144,)
+2025-12-08 18:03:31,260 - INFO - Available blocks: [3, 4, 5, 6, 7, 8] (Total: 6)
+2025-12-08 18:03:31,266 - INFO -   Fold 3: Train=120, Test=24
+2025-12-08 18:12:30,682 - INFO -     Block 3 Accuracy: 0.9167
+2025-12-08 18:12:30,690 - INFO -   Fold 4: Train=120, Test=24
+2025-12-08 18:21:29,110 - INFO -     Block 4 Accuracy: 0.9583
+2025-12-08 18:21:29,118 - INFO -   Fold 5: Train=120, Test=24
+2025-12-08 18:30:28,987 - INFO -     Block 5 Accuracy: 0.9167
+2025-12-08 18:30:28,995 - INFO -   Fold 6: Train=120, Test=24
+2025-12-08 18:39:29,483 - INFO -     Block 6 Accuracy: 0.9583
+2025-12-08 18:39:29,490 - INFO -   Fold 7: Train=120, Test=24
+2025-12-08 18:48:32,487 - INFO -     Block 7 Accuracy: 0.8750
+2025-12-08 18:48:32,493 - INFO -   Fold 8: Train=120, Test=24
+2025-12-08 18:57:32,634 - INFO -     Block 8 Accuracy: 0.9167
+2025-12-08 18:57:32,635 - INFO - Subject 8 LOBO Mean Accuracy: 0.923611 (Total samples: 144)
+2025-12-08 18:57:32,635 - INFO - Training final model on all data for Subject 8...
+2025-12-08 19:08:24,435 - INFO - Final model saved to models\subject_8_model.pkl
+2025-12-08 19:08:24,435 - INFO - Finished Subject 8
+2025-12-08 19:08:24,458 - INFO - ==========================================
+2025-12-08 19:08:24,458 - INFO - Starting LOBO Training for Subject 9
+2025-12-08 19:08:24,458 - INFO - ==========================================
+2025-12-08 19:08:24,458 - INFO - Loading data for Subject 9...
+2025-12-08 19:08:24,875 - INFO - Filtering classes to [0, 1]...
+2025-12-08 19:08:24,881 - INFO - Filtered Data: X=(144, 22, 1000), y=(144,)
+2025-12-08 19:08:24,881 - INFO - Available blocks: [3, 4, 5, 6, 7, 8] (Total: 6)
+2025-12-08 19:08:24,888 - INFO -   Fold 3: Train=120, Test=24
+2025-12-08 19:17:23,328 - INFO -     Block 3 Accuracy: 0.8333
+2025-12-08 19:17:23,336 - INFO -   Fold 4: Train=120, Test=24
+2025-12-08 19:26:22,808 - INFO -     Block 4 Accuracy: 0.9583
+2025-12-08 19:26:22,816 - INFO -   Fold 5: Train=120, Test=24
+2025-12-08 19:35:21,474 - INFO -     Block 5 Accuracy: 1.0000
+2025-12-08 19:35:21,482 - INFO -   Fold 6: Train=120, Test=24
+2025-12-08 19:44:20,851 - INFO -     Block 6 Accuracy: 1.0000
+2025-12-08 19:44:20,858 - INFO -   Fold 7: Train=120, Test=24
+2025-12-08 19:53:18,486 - INFO -     Block 7 Accuracy: 0.9583
+2025-12-08 19:53:18,492 - INFO -   Fold 8: Train=120, Test=24
+2025-12-08 20:02:16,501 - INFO -     Block 8 Accuracy: 0.9583
+2025-12-08 20:02:16,502 - INFO - Subject 9 LOBO Mean Accuracy: 0.951389 (Total samples: 144)
+2025-12-08 20:02:16,502 - INFO - Training final model on all data for Subject 9...
+2025-12-08 20:13:07,355 - INFO - Final model saved to models\subject_9_model.pkl
+2025-12-08 20:13:07,356 - INFO - Finished Subject 9
+2025-12-08 20:13:07,374 - INFO - 
+2025-12-08 20:13:07,375 - INFO - ==================================================
+2025-12-08 20:13:07,375 - INFO - TRAINING SUMMARY (Time Window: 0.5s-1.5s)
+2025-12-08 20:13:07,375 - INFO - ==================================================
+2025-12-08 20:13:07,375 - INFO -  Subject    Accuracy   Num_Samples
+2025-12-08 20:13:07,375 - INFO -        1    0.756944           144
+2025-12-08 20:13:07,376 - INFO -        2    0.548611           144
+2025-12-08 20:13:07,376 - INFO -        3    0.868056           144
+2025-12-08 20:13:07,376 - INFO -        4    0.625000           144
+2025-12-08 20:13:07,377 - INFO -        5    0.736111           144
+2025-12-08 20:13:07,377 - INFO -        6    0.750000           144
+2025-12-08 20:13:07,377 - INFO -        7    0.673611           144
+2025-12-08 20:13:07,378 - INFO -        8    0.923611           144
+2025-12-08 20:13:07,378 - INFO -        9    0.951389           144
+2025-12-08 20:13:07,378 - INFO - -----------------------------------
+2025-12-08 20:13:07,378 - INFO -     Mean    0.759259          1296
+2025-12-08 20:13:07,378 - INFO - ==================================================
+2025-12-08 20:13:07,378 - INFO - Execution finished at: 2025-12-08 20:13:07.378791
+2025-12-08 20:13:07,379 - INFO - Total execution time: 9:42:22.026336
+2025-12-08 20:13:07,379 - INFO - Log saved to: logs\train_0.5s-1.5s_20251208_103045.log
