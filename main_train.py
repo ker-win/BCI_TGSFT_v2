@@ -15,7 +15,7 @@ from model import FGSFTMIModel
 def get_time_window_str():
     """Returns a string describing the current time window settings."""
     # Get from preprocessing defaults or cfg
-    t_start = 0.0
+    t_start = 0.5
     t_end = t_start + cfg.trial_len_sec
     return f"{t_start:.1f}s-{t_end:.1f}s"
 
